@@ -165,224 +165,347 @@
                                 <i class="bi bi-arrow-right-short"></i>
                             </button>
 
-                            <div id="statusBadge" class="status-badge" style="display:none;"></div>
+                            <!-- Supported URL Examples -->
+                            <div class="url-reference mt-3">
+                                <button class="url-reference-toggle" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#urlExamples" aria-expanded="false" aria-controls="urlExamples">
+                                    <span>
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        Supported Suno URL examples
+                                    </span>
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
 
-                            <!-- Results -->
-                            <div class="result-box" id="resultBox">
+                                <div class="collapse" id="urlExamples">
+                                    <div class="url-reference-content">
 
-                                <div class="result-divider">
-                                    <span><i class="bi bi-check-circle-fill"></i> Track ready</span>
-                                </div>
-
-                                <!-- Song Metadata -->
-                                <div class="song-info">
-                                    <div class="cover-wrap">
-                                        <img id="resCover" class="cover-img" src="" alt="Cover">
-                                        <span class="cover-play"><i class="bi bi-play-fill"></i></span>
-                                    </div>
-                                    <div class="song-details">
-                                        <div class="result-kicker">NOW PLAYING</div>
-                                        <div class="song-title" id="resTitle">Title</div>
-                                        <div class="song-tags" id="resTags">Suno AI Track</div>
-                                        <div class="badges-row">
-                                            <span class="song-duration-badge" id="resDuration">
-                                                <i class="bi bi-clock"></i> 0:00
-                                            </span>
-                                            <span class="song-format-badge" id="resFormat">MP3</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Full Player -->
-                                <div class="player-box">
-                                    <div class="player-header">
-                                        <span class="player-title">
-                                            <span class="mini-icon"><i class="bi bi-music-note-beamed"></i></span>
-                                            Full song
-                                        </span>
-                                        <div class="soundwave" id="waveMain">
-                                            <span></span><span></span><span></span><span></span>
-                                        </div>
-                                    </div>
-                                    <audio id="resAudio" class="audio-player" controls preload="metadata"
-                                        onplay="setWave('waveMain', true)" onpause="setWave('waveMain', false)"
-                                        onended="setWave('waveMain', false)">
-                                        Your browser does not support the audio player.
-                                    </audio>
-                                    <a id="resDownloadLink" class="btn-save-phone" href="" download>
-                                        <i class="bi bi-download"></i> Save Full Song
-                                    </a>
-                                </div>
-
-                                <!-- Audio Tools -->
-                                <div id="tools" class="tools-grid">
-
-                                    <!-- Stems -->
-                                    <div class="tool-card stem-section">
-                                        <div class="tool-card-top">
-                                            <div class="section-icon gradient-orange">
-                                                <i class="bi bi-mic-fill"></i>
-                                            </div>
-                                            <span class="tool-tag tag-pink">AI DSP</span>
-                                        </div>
-                                        <div class="stem-header">
-                                            <div class="stem-title">
-                                                Separate track & vocals
-                                            </div>
-                                        </div>
-                                        <p class="stem-desc">
-                                            Split the loaded song into instrumental and vocal tracks,
-                                            then preview or save each one.
+                                        <p class="url-reference-description">
+                                            Select a demo link to fill the downloader input automatically.
                                         </p>
 
-                                        <button class="btn-create-stem" id="btnCreateStem" onclick="separateStems()">
-                                            <span><i class="bi bi-magic"></i> SEPARATE STEMS</span>
-                                        </button>
-
-                                        <div class="stem-result-box" id="stemResultBox">
-                                            <div class="stem-card">
-                                                <div class="stem-card-header">
-                                                    <div class="stem-card-title inst">
-                                                        <i class="bi bi-music-note-list"></i> Instrumental
-                                                    </div>
-                                                    <div class="soundwave" id="waveInst">
-                                                        <span></span><span></span><span></span><span></span>
-                                                    </div>
-                                                </div>
-                                                <div class="stem-card-desc">Music / karaoke version</div>
-                                                <audio id="instAudioPlayer" class="audio-player" controls
-                                                    preload="metadata" onplay="setWave('waveInst', true)"
-                                                    onpause="setWave('waveInst', false)"
-                                                    onended="setWave('waveInst', false)"></audio>
-                                                <a id="instDownloadLink" class="btn-save-stem-inst" href="" download>
-                                                    <i class="bi bi-download"></i> Save Instrumental
-                                                </a>
+                                        <!-- Demo Song 1 -->
+                                        <div class="url-example-item">
+                                            <div>
+                                                <strong>
+                                                    <i class="bi bi-music-note-beamed me-1"></i>
+                                                    Demo Song 1
+                                                </strong>
+                                                <code>https://suno.com/s/WxZwWbtM8cb5G48P</code>
                                             </div>
+                                            <button type="button" class="url-example-copy"
+                                                onclick="fillSunoExample('https://suno.com/s/WxZwWbtM8cb5G48P')">
+                                                Use example
+                                            </button>
+                                        </div>
 
-                                            <div class="stem-card">
-                                                <div class="stem-card-header">
-                                                    <div class="stem-card-title vocal">
-                                                        <i class="bi bi-mic"></i> Vocals only
-                                                    </div>
-                                                    <div class="soundwave" id="waveVocal">
-                                                        <span></span><span></span><span></span><span></span>
-                                                    </div>
-                                                </div>
-                                                <div class="stem-card-desc">Clean isolated vocal track</div>
-                                                <audio id="vocalAudioPlayer" class="audio-player" controls
-                                                    preload="metadata" onplay="setWave('waveVocal', true)"
-                                                    onpause="setWave('waveVocal', false)"
-                                                    onended="setWave('waveVocal', false)"></audio>
-                                                <a id="vocalDownloadLink" class="btn-save-stem-vocal" href="" download>
-                                                    <i class="bi bi-download"></i> Save Vocals
-                                                </a>
+                                        <!-- Demo Song 2 -->
+                                        <div class="url-example-item">
+                                            <div>
+                                                <strong>
+                                                    <i class="bi bi-music-note-beamed me-1"></i>
+                                                    Demo Song 2
+                                                </strong>
+                                                <code>https://suno.com/s/APAJBfHXzpLnBsEs</code>
                                             </div>
+                                            <button type="button" class="url-example-copy"
+                                                onclick="fillSunoExample('https://suno.com/s/APAJBfHXzpLnBsEs')">
+                                                Use example
+                                            </button>
                                         </div>
-                                    </div>
 
-                                    <!-- Sample -->
-                                    <div class="tool-card sample-section">
-                                        <div class="tool-card-top">
-                                            <div class="section-icon gradient-purple">
-                                                <i class="bi bi-scissors"></i>
+                                        <!-- Demo Song 3 -->
+                                        <div class="url-example-item">
+                                            <div>
+                                                <strong>
+                                                    <i class="bi bi-music-note-beamed me-1"></i>
+                                                    Demo Song 3
+                                                </strong>
+                                                <code>https://suno.com/s/NY3DvLKQ5QopDzPU</code>
                                             </div>
-                                            <span class="tool-tag tag-purple">CLIP</span>
+                                            <button type="button" class="url-example-copy"
+                                                onclick="fillSunoExample('https://suno.com/s/NY3DvLKQ5QopDzPU')">
+                                                Use example
+                                            </button>
                                         </div>
-                                        <div class="sample-header">
-                                            <div class="sample-title">Create a quick sample</div>
+
+                                        <!-- Demo Song 4 -->
+                                        <div class="url-example-item">
+                                            <div>
+                                                <strong>
+                                                    <i class="bi bi-music-note-beamed me-1"></i>
+                                                    Demo Song 4
+                                                </strong>
+                                                <code>https://suno.com/s/IQjJCfrVTRu0wvZO</code>
+                                            </div>
+                                            <button type="button" class="url-example-copy"
+                                                onclick="fillSunoExample('https://suno.com/s/IQjJCfrVTRu0wvZO')">
+                                                Use example
+                                            </button>
                                         </div>
-                                        <p class="sample-desc" id="sampleDescText">
-                                            Generate a song excerpt with fade processing for a quick preview.
+
+                                        <!-- Demo Song 5 -->
+                                        <div class="url-example-item">
+                                            <div>
+                                                <strong>
+                                                    <i class="bi bi-music-note-beamed me-1"></i>
+                                                    Demo Song 5
+                                                </strong>
+                                                <code>https://suno.com/s/1lPpWawS5O0VIe1W</code>
+                                            </div>
+                                            <button type="button" class="url-example-copy"
+                                                onclick="fillSunoExample('https://suno.com/s/1lPpWawS5O0VIe1W')">
+                                                Use example
+                                            </button>
+                                        </div>
+
+                                        <!-- Large Hook -->
+                                        <div class="url-example-item">
+                                            <div>
+                                                <strong>
+                                                    <i class="bi bi-soundwave me-1"></i>
+                                                    Large Hook URL
+                                                </strong>
+                                                <code>https://suno.com/hook/f0a5d387-4ee3-4cb8-a61a-217312ed4905</code>
+                                            </div>
+                                            <button type="button" class="url-example-copy"
+                                                onclick="fillSunoExample('https://suno.com/hook/f0a5d387-4ee3-4cb8-a61a-217312ed4905')">
+                                                Use example
+                                            </button>
+                                        </div>
+
+                                        <p class="url-reference-note mb-0">
+                                            Select a link to fill the input, then click
+                                            Load, Listen &amp; Download.
                                         </p>
 
-                                        <div class="preset-grid">
-                                            <button class="preset-btn" onclick="selectPreset('30s', this)">
-                                                <strong>30s</strong><small>Quick</small>
-                                            </button>
-                                            <button class="preset-btn" onclick="selectPreset('60s', this)">
-                                                <strong>1 min</strong><small>Short</small>
-                                            </button>
-                                            <button class="preset-btn" onclick="selectPreset('120s', this)">
-                                                <strong>2 min</strong><small>Long</small>
-                                            </button>
-                                            <button class="preset-btn active" onclick="selectPreset('auto', this)">
-                                                <strong>Auto</strong><small>Suggested</small>
-                                            </button>
+                                    </div>
+                                </div>
+
+
+
+                                <div id="statusBadge" class="status-badge" style="display:none;"></div>
+
+                                <!-- Results -->
+                                <div class="result-box" id="resultBox">
+
+                                    <div class="result-divider">
+                                        <span><i class="bi bi-check-circle-fill"></i> Track ready</span>
+                                    </div>
+
+                                    <!-- Song Metadata -->
+                                    <div class="song-info">
+                                        <div class="cover-wrap">
+                                            <img id="resCover" class="cover-img" src="" alt="Cover">
+                                            <span class="cover-play"><i class="bi bi-play-fill"></i></span>
                                         </div>
-
-                                        <button class="btn-create-sample" id="btnCreateSample"
-                                            onclick="generateSample()">
-                                            <span><i class="bi bi-scissors"></i> GENERATE SAMPLE</span>
-                                        </button>
-
-                                        <div class="sample-result-box" id="sampleResultBox">
-                                            <div class="player-header">
-                                                <span class="sample-result-label" id="sampleResultLabel">
-                                                    <i class="bi bi-headphones"></i> Listen to sample
+                                        <div class="song-details">
+                                            <div class="result-kicker">NOW PLAYING</div>
+                                            <div class="song-title" id="resTitle">Title</div>
+                                            <div class="song-tags" id="resTags">Suno AI Track</div>
+                                            <div class="badges-row">
+                                                <span class="song-duration-badge" id="resDuration">
+                                                    <i class="bi bi-clock"></i> 0:00
                                                 </span>
-                                                <div class="soundwave" id="waveSample">
-                                                    <span></span><span></span><span></span><span></span>
+                                                <span class="song-format-badge" id="resFormat">MP3</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Full Player -->
+                                    <div class="player-box">
+                                        <div class="player-header">
+                                            <span class="player-title">
+                                                <span class="mini-icon"><i class="bi bi-music-note-beamed"></i></span>
+                                                Full song
+                                            </span>
+                                            <div class="soundwave" id="waveMain">
+                                                <span></span><span></span><span></span><span></span>
+                                            </div>
+                                        </div>
+                                        <audio id="resAudio" class="audio-player" controls preload="metadata"
+                                            onplay="setWave('waveMain', true)" onpause="setWave('waveMain', false)"
+                                            onended="setWave('waveMain', false)">
+                                            Your browser does not support the audio player.
+                                        </audio>
+                                        <a id="resDownloadLink" class="btn-save-phone" href="" download>
+                                            <i class="bi bi-download"></i> Save Full Song
+                                        </a>
+                                    </div>
+
+                                    <!-- Audio Tools -->
+                                    <div id="tools" class="tools-grid">
+
+                                        <!-- Stems -->
+                                        <div class="tool-card stem-section">
+                                            <div class="tool-card-top">
+                                                <div class="section-icon gradient-orange">
+                                                    <i class="bi bi-mic-fill"></i>
+                                                </div>
+                                                <span class="tool-tag tag-pink">AI DSP</span>
+                                            </div>
+                                            <div class="stem-header">
+                                                <div class="stem-title">
+                                                    Separate track & vocals
                                                 </div>
                                             </div>
-                                            <audio id="sampleAudioPlayer" class="audio-player" controls
-                                                preload="metadata" onplay="setWave('waveSample', true)"
-                                                onpause="setWave('waveSample', false)"
-                                                onended="setWave('waveSample', false)"></audio>
-                                            <a id="sampleDownloadLink" class="btn-save-sample" href="" download>
-                                                <i class="bi bi-download"></i> Save Sample
-                                            </a>
+                                            <p class="stem-desc">
+                                                Split the loaded song into instrumental and vocal tracks,
+                                                then preview or save each one.
+                                            </p>
+
+                                            <button class="btn-create-stem" id="btnCreateStem"
+                                                onclick="separateStems()">
+                                                <span><i class="bi bi-magic"></i> SEPARATE STEMS</span>
+                                            </button>
+
+                                            <div class="stem-result-box" id="stemResultBox">
+                                                <div class="stem-card">
+                                                    <div class="stem-card-header">
+                                                        <div class="stem-card-title inst">
+                                                            <i class="bi bi-music-note-list"></i> Instrumental
+                                                        </div>
+                                                        <div class="soundwave" id="waveInst">
+                                                            <span></span><span></span><span></span><span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="stem-card-desc">Music / karaoke version</div>
+                                                    <audio id="instAudioPlayer" class="audio-player" controls
+                                                        preload="metadata" onplay="setWave('waveInst', true)"
+                                                        onpause="setWave('waveInst', false)"
+                                                        onended="setWave('waveInst', false)"></audio>
+                                                    <a id="instDownloadLink" class="btn-save-stem-inst" href=""
+                                                        download>
+                                                        <i class="bi bi-download"></i> Save Instrumental
+                                                    </a>
+                                                </div>
+
+                                                <div class="stem-card">
+                                                    <div class="stem-card-header">
+                                                        <div class="stem-card-title vocal">
+                                                            <i class="bi bi-mic"></i> Vocals only
+                                                        </div>
+                                                        <div class="soundwave" id="waveVocal">
+                                                            <span></span><span></span><span></span><span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="stem-card-desc">Clean isolated vocal track</div>
+                                                    <audio id="vocalAudioPlayer" class="audio-player" controls
+                                                        preload="metadata" onplay="setWave('waveVocal', true)"
+                                                        onpause="setWave('waveVocal', false)"
+                                                        onended="setWave('waveVocal', false)"></audio>
+                                                    <a id="vocalDownloadLink" class="btn-save-stem-vocal" href=""
+                                                        download>
+                                                        <i class="bi bi-download"></i> Save Vocals
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sample -->
+                                        <div class="tool-card sample-section">
+                                            <div class="tool-card-top">
+                                                <div class="section-icon gradient-purple">
+                                                    <i class="bi bi-scissors"></i>
+                                                </div>
+                                                <span class="tool-tag tag-purple">CLIP</span>
+                                            </div>
+                                            <div class="sample-header">
+                                                <div class="sample-title">Create a quick sample</div>
+                                            </div>
+                                            <p class="sample-desc" id="sampleDescText">
+                                                Generate a song excerpt with fade processing for a quick
+                                                preview.
+                                            </p>
+
+                                            <div class="preset-grid">
+                                                <button class="preset-btn" onclick="selectPreset('30s', this)">
+                                                    <strong>30s</strong><small>Quick</small>
+                                                </button>
+                                                <button class="preset-btn" onclick="selectPreset('60s', this)">
+                                                    <strong>1 min</strong><small>Short</small>
+                                                </button>
+                                                <button class="preset-btn" onclick="selectPreset('120s', this)">
+                                                    <strong>2 min</strong><small>Long</small>
+                                                </button>
+                                                <button class="preset-btn active" onclick="selectPreset('auto', this)">
+                                                    <strong>Auto</strong><small>Suggested</small>
+                                                </button>
+                                            </div>
+
+                                            <button class="btn-create-sample" id="btnCreateSample"
+                                                onclick="generateSample()">
+                                                <span><i class="bi bi-scissors"></i> GENERATE SAMPLE</span>
+                                            </button>
+
+                                            <div class="sample-result-box" id="sampleResultBox">
+                                                <div class="player-header">
+                                                    <span class="sample-result-label" id="sampleResultLabel">
+                                                        <i class="bi bi-headphones"></i> Listen to sample
+                                                    </span>
+                                                    <div class="soundwave" id="waveSample">
+                                                        <span></span><span></span><span></span><span></span>
+                                                    </div>
+                                                </div>
+                                                <audio id="sampleAudioPlayer" class="audio-player" controls
+                                                    preload="metadata" onplay="setWave('waveSample', true)"
+                                                    onpause="setWave('waveSample', false)"
+                                                    onended="setWave('waveSample', false)"></audio>
+                                                <a id="sampleDownloadLink" class="btn-save-sample" href="" download>
+                                                    <i class="bi bi-download"></i> Save Sample
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Security / ephemeral note -->
-                        <div class="privacy-note">
-                            <div class="privacy-icon"><i class="bi bi-shield-lock-fill"></i></div>
-                            <div>
-                                <strong>Ephemeral server mode</strong>
-                                <p>Downloads and samples are automatically removed after 5 minutes to save server space.
-                                </p>
-                            </div>
-                            <i class="bi bi-check2-circle privacy-check"></i>
-                        </div>
-
-
-
-
-                        <h1 class="hero-title">
-                            Your music.
-                            <span>Ready for anything.</span>
-                        </h1>
-
-                        <p class="hero-subtitle mx-auto">
-                            Load a Suno track, preview it instantly, choose your preferred format,
-                            separate vocals and instrumentals, or create a quick sample.
-                        </p>
-
-                        <div class="hero-pills justify-content-center">
-                            <span><i class="bi bi-lightning-charge-fill"></i> Fast processing</span>
-                            <span><i class="bi bi-headphones"></i> Instant preview</span>
-                            <span><i class="bi bi-shield-check"></i> Ephemeral server</span>
-                        </div>
-
-                        <!-- History -->
-                        <section id="history" class="history-section">
-                            <div class="section-heading history-heading">
-                                <div class="section-icon gradient-blue">
-                                    <i class="bi bi-folder2-open"></i>
-                                </div>
+                            <!-- Security / ephemeral note -->
+                            <div class="privacy-note">
+                                <div class="privacy-icon"><i class="bi bi-shield-lock-fill"></i></div>
                                 <div>
-                                    <h2>Recent files</h2>
-                                    <p>Files currently available on your server.</p>
+                                    <strong>Ephemeral server mode</strong>
+                                    <p>Downloads and samples are automatically removed after 5 minutes to save
+                                        server space.
+                                    </p>
                                 </div>
+                                <i class="bi bi-check2-circle privacy-check"></i>
                             </div>
-                            <div id="historyList" class="history-list"></div>
-                        </section>
+
+
+
+
+                            <h1 class="hero-title">
+                                Your music.
+                                <span>Ready for anything.</span>
+                            </h1>
+
+                            <p class="hero-subtitle mx-auto">
+                                Load a Suno track, preview it instantly, choose your preferred format,
+                                separate vocals and instrumentals, or create a quick sample.
+                            </p>
+
+                            <div class="hero-pills justify-content-center">
+                                <span><i class="bi bi-lightning-charge-fill"></i> Fast processing</span>
+                                <span><i class="bi bi-headphones"></i> Instant preview</span>
+                                <span><i class="bi bi-shield-check"></i> Ephemeral server</span>
+                            </div>
+
+                            <!-- History -->
+                            <section id="history" class="history-section">
+                                <div class="section-heading history-heading">
+                                    <div class="section-icon gradient-blue">
+                                        <i class="bi bi-folder2-open"></i>
+                                    </div>
+                                    <div>
+                                        <h2>Recent files</h2>
+                                        <p>Files currently available on your server.</p>
+                                    </div>
+                                </div>
+                                <div id="historyList" class="history-list"></div>
+                            </section>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
 

@@ -154,7 +154,7 @@ async function separateStems() {
     try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 90000);
-        
+
         // const response = await fetch('/api/separate', {
         const response = await fetch(`${API_BASE_URL}/api/separate`, {
             method: 'POST',
@@ -304,6 +304,22 @@ async function loadHistory() {
     } catch (e) {
         console.error(e);
     }
+}
+function fillSunoExample(url) {
+    const input = document.getElementById("sunoUrl");
+
+    if (!input) {
+        console.error("Suno URL input was not found.");
+        return;
+    }
+
+    input.value = url;
+    input.focus();
+
+    input.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+    });
 }
 
 // Load history at startup

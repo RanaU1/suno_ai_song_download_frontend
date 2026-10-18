@@ -1812,3 +1812,107 @@ input:focus-visible {
     transform: scale(1.03);
     box-shadow: 0 6px 24px rgba(34, 158, 217, 0.55);
 }
+
+
+/* Supported URL reference section */
+.url-reference {
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.url-reference-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    font: inherit;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.url-reference-toggle:hover {
+    background: rgba(255, 255, 255, 0.045);
+}
+
+.url-reference-toggle .bi-chevron-down {
+    transition: transform 0.2s ease;
+}
+
+.url-reference-toggle[aria-expanded="true"] .bi-chevron-down {
+    transform: rotate(180deg);
+}
+
+.url-reference-content {
+    padding: 0 14px 14px;
+}
+
+.url-reference-description {
+    margin: 0 0 12px;
+    font-size: 0.82rem;
+    opacity: 0.75;
+}
+
+.url-example-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.url-example-item>div {
+    min-width: 0;
+}
+
+.url-example-item strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.84rem;
+}
+
+.url-example-item code {
+    display: block;
+    overflow-wrap: anywhere;
+    color: #b9a6ff;
+    font-size: 0.78rem;
+}
+
+.url-example-copy {
+    flex-shrink: 0;
+    padding: 7px 10px;
+    border: 1px solid rgba(185, 166, 255, 0.35);
+    border-radius: 7px;
+    background: transparent;
+    color: inherit;
+    font-size: 0.76rem;
+    cursor: pointer;
+}
+
+.url-example-copy:hover {
+    background: rgba(185, 166, 255, 0.12);
+}
+
+.url-reference-note {
+    margin-top: 12px;
+    font-size: 0.76rem;
+    opacity: 0.65;
+}
+
+@media (max-width: 480px) {
+    .url-example-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
