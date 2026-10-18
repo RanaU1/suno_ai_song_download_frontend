@@ -1703,3 +1703,132 @@ input:focus-visible {
         transition-duration: .01ms !important;
     }
 }
+
+
+/* --- Telegram Promo Banner --- */
+.telegram-promo-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(34, 158, 217, 0.12), rgba(13, 202, 240, 0.05));
+    border: 1px solid rgba(34, 158, 217, 0.35);
+    border-radius: 18px;
+    padding: 24px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 10px 30px -10px rgba(34, 158, 217, 0.25);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.telegram-promo-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(34, 158, 217, 0.6);
+}
+
+.tg-badge {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #229ed9;
+    background: rgba(34, 158, 217, 0.15);
+    border: 1px solid rgba(34, 158, 217, 0.3);
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tg-content-wrap {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: 600px;
+}
+
+.tg-icon-box {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #229ed9, #1783b5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.9rem;
+    box-shadow: 0 6px 18px rgba(34, 158, 217, 0.4);
+}
+
+.tg-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+}
+
+.tg-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.btn-tg-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: linear-gradient(135deg, #229ed9, #0088cc);
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(34, 158, 217, 0.35);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-tg-action:hover {
+    background: linear-gradient(135deg, #28a8e9, #0099e6);
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(34, 158, 217, 0.55);
+}
+
+/* Mobile responsive layout */
+@media (max-width: 768px) {
+    .telegram-promo-card {
+        padding: 20px;
+        padding-top: 36px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tg-content-wrap {
+        gap: 14px;
+    }
+
+    .tg-icon-box {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        font-size: 1.5rem;
+    }
+
+    .tg-title {
+        font-size: 1.1rem;
+    }
+
+    .btn-tg-action {
+        width: 100%;
+        justify-content: center;
+    }
+}
