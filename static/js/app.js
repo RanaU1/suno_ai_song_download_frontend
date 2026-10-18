@@ -1,5 +1,5 @@
-const API_BASE_URL = "http://localhost:9999";
-// const API_BASE_URL = "https://api.sunoaisongdownload.online";
+// const API_BASE_URL = "http://localhost:9999";
+const API_BASE_URL = "https://api.sunoaisongdownload.online";
 
 let selectedFormat = "m4a";
 let currentFilename = "";
