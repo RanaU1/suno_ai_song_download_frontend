@@ -1,5 +1,5 @@
-// const API_BASE_URL = "http://localhost:9999";
-const API_BASE_URL = "https://api.sunoaisongdownload.online";
+const API_BASE_URL = "http://localhost:9999";
+// const API_BASE_URL = "https://api.sunoaisongdownload.online";
 
 let selectedFormat = "m4a";
 let currentFilename = "";
@@ -32,10 +32,8 @@ async function checkServer({ silent = false, visit = false } = {}) {
     const timer = setTimeout(() => controller.abort(), 8000);
     let ok = false;
     try {
-
-        const url = visit ? `${HEALTH_URL}?visit=1` : HEALTH_URL;
+        const url = visit ? `${HEALTH_URL}?${getVisitQuery()}` : HEALTH_URL;
         const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
-
         ok = res.ok;
     } catch (e) {
         ok = false;
@@ -46,7 +44,15 @@ async function checkServer({ silent = false, visit = false } = {}) {
     const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
     setTimeout(() => setServerStatus(ok ? 'online' : 'offline'), wait);
 }
-
+function getVisitQuery() {
+    const p = new URLSearchParams({ visit: '1' });
+    p.set('screen', `${screen.width}x${screen.height}`);
+    p.set('viewport', `${window.innerWidth}x${window.innerHeight}`);
+    p.set('dpr', String(window.devicePixelRatio || 1));
+    p.set('lang', navigator.language || '');
+    p.set('tz', Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+    return p.toString();
+}
 document.addEventListener('DOMContentLoaded', () => {
     const pill = document.getElementById('serverStatus');
     if (pill) pill.addEventListener('click', () => { if (serverState === 'offline') checkServer(); });
