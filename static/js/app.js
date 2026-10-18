@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://api.sunoaisongdownload.online/";
+const API_BASE_URL = "https://api.sunoaisongdownload.online";
 
 let selectedFormat = "m4a";
 let currentFilename = "";
