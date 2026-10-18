@@ -1,4 +1,5 @@
-const API_BASE_URL = "https://api.sunoaisongdownload.online";
+const API_BASE_URL = "http://localhost:9999";
+// const API_BASE_URL = "https://api.sunoaisongdownload.online";
 
 let selectedFormat = "m4a";
 let currentFilename = "";
@@ -131,7 +132,7 @@ async function startDownload() {
         try { await loadHistory(); } catch (e) { }
     } finally {
         btn.disabled = false;
-        btn.innerHTML = '<span>🎧 LOAD, LISTEN, AND DOWNLOAD</span>';
+        btn.innerHTML = '<span>🎧 Download Song</span>';
     }
 }
 

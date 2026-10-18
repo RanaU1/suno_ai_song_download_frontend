@@ -8,14 +8,8 @@
 
     <link rel="icon" href="./static/favicon.ico">
 
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./static/css/style.css">
 </head>
@@ -32,7 +26,7 @@
                 <span class="brand-mark"><i class="bi bi-soundwave"></i></span>
                 <span>
                     <strong>Suno Ai Song Download</strong>
-                    <small>Ai Musics Only</small>
+                    <small>Create & Download Suno Ai Songs</small>
                 </span>
             </a>
 
@@ -57,19 +51,6 @@
     </nav>
 
     <main>
-        <!-- Hero
-        <section class="hero-section">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-9 text-center">
-                        <div class="eyebrow">
-                            <span class="eyebrow-icon"><i class="bi bi-stars"></i></span>
-                            Suno song Download
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
 
         <!-- Main Workspace -->
         <section class="workspace-section" id="download">
@@ -77,35 +58,6 @@
                 <div class="row g-4 justify-content-center">
                     <div class="col-xl-9">
 
-
-                        <!-- Centered Telegram Bot Banner -->
-                        <div class="telegram-promo-card-centered mb-4">
-                            <div class="tg-badge-center">
-                                <i class="bi bi-lightning-charge-fill"></i> FAST & UNLIMITED
-                            </div>
-
-                            <!-- Bot Avatar Box with Telegram indicator -->
-                            <div class="bot-avatar-wrapper">
-                                <img src="https://cdn5.telesco.pe/file/dsb0pVYR4sOgZuaSFVGNqWTloXyctaFteqjpcbBDdcFqCw3S_DDJUlM7mpGEwKcnlpwtsh6GLbQgioTRCDWbd6WfukTbuO1BWvANRiG-BMWOSOEefxId-ADU8dFBw0z_pd04TbwKIw6UqLxZDjvNXc483E2v_G2FQwZGYLY3OBtU6ai9fDqB1KBq2tBaT6Q-C2BIXmw5xyY70Rbvq3Um4y_jVIoMIZS64-keBQK8lqHTB8sh5rHK5xyIbeHogVRgB0t9HVP5I0OElcsfooraybTJaWchSz3Fff2iPKtFfjf8mWz7wMIyLAyy16l0svzEleFiBWySm3TGlN785Vy0kA.jpg"
-                                    alt="Suno Bot Logo" class="bot-avatar-img">
-                                <span class="tg-indicator-badge">
-                                    <i class="bi bi-telegram"></i>
-                                </span>
-                            </div>
-
-                            <div class="tg-text-center">
-                                <h3 class="tg-title-center">Download Unlimited Suno AI Songs on Telegram</h3>
-                                <p class="tg-subtitle-center">No queue, one-click instant audio & stem downloads
-                                    directly inside your Telegram app.</p>
-                            </div>
-
-                            <a href="https://t.me/SunoAiSongDownloadBot" target="_blank" rel="noopener noreferrer"
-                                class="btn-tg-action-center">
-                                <i class="bi bi-robot"></i>
-                                <span>Open Telegram Bot</span>
-                                <i class="bi bi-arrow-up-right"></i>
-                            </a>
-                        </div>
 
 
 
@@ -145,12 +97,6 @@
                             </div>
 
 
-
-                            <div class="input-label">
-                                <span>SONG URL</span>
-                                <span class="input-hint"><i class="bi bi-link-45deg"></i> Suno link</span>
-                            </div>
-
                             <div class="input-group input-group-modern">
                                 <span class="input-group-text"><i class="bi bi-globe2"></i></span>
                                 <input type="text" id="sunoUrl" placeholder="https://suno.com/song/..."
@@ -161,7 +107,7 @@
                             </div>
 
                             <button class="btn-download" id="btnDownload" onclick="startDownload()">
-                                <span><i class="bi bi-headphones"></i> LOAD, LISTEN & DOWNLOAD</span>
+                                <span><i class="bi bi-headphones"></i> Download Song</span>
                                 <i class="bi bi-arrow-right-short"></i>
                             </button>
 
@@ -459,51 +405,45 @@
                                 </div>
                             </div>
 
-                            <!-- Security / ephemeral note -->
-                            <div class="privacy-note">
-                                <div class="privacy-icon"><i class="bi bi-shield-lock-fill"></i></div>
-                                <div>
-                                    <strong>Ephemeral server mode</strong>
-                                    <p>Downloads and samples are automatically removed after 5 minutes to save
-                                        server space.
-                                    </p>
-                                </div>
-                                <i class="bi bi-check2-circle privacy-check"></i>
-                            </div>
-
-
-
-
-                            <h1 class="hero-title">
-                                Your music.
-                                <span>Ready for anything.</span>
-                            </h1>
-
-                            <p class="hero-subtitle mx-auto">
-                                Load a Suno track, preview it instantly, choose your preferred format,
-                                separate vocals and instrumentals, or create a quick sample.
-                            </p>
-
                             <div class="hero-pills justify-content-center">
                                 <span><i class="bi bi-lightning-charge-fill"></i> Fast processing</span>
                                 <span><i class="bi bi-headphones"></i> Instant preview</span>
                                 <span><i class="bi bi-shield-check"></i> Ephemeral server</span>
                             </div>
 
-                            <!-- History -->
-                            <section id="history" class="history-section">
-                                <div class="section-heading history-heading">
-                                    <div class="section-icon gradient-blue">
-                                        <i class="bi bi-folder2-open"></i>
-                                    </div>
-                                    <div>
-                                        <h2>Recent files</h2>
-                                        <p>Files currently available on your server.</p>
-                                    </div>
-                                </div>
-                                <div id="historyList" class="history-list"></div>
-                            </section>
                         </div>
+
+
+
+                        <!-- Centered Telegram Bot Banner -->
+                        <div class="telegram-promo-card-centered mb-4">
+                            <div class="tg-badge-center">
+                                <i class="bi bi-lightning-charge-fill"></i> FAST & UNLIMITED
+                            </div>
+
+                            <!-- Bot Avatar Box with Telegram indicator -->
+                            <div class="bot-avatar-wrapper">
+                                <img src="https://cdn5.telesco.pe/file/dsb0pVYR4sOgZuaSFVGNqWTloXyctaFteqjpcbBDdcFqCw3S_DDJUlM7mpGEwKcnlpwtsh6GLbQgioTRCDWbd6WfukTbuO1BWvANRiG-BMWOSOEefxId-ADU8dFBw0z_pd04TbwKIw6UqLxZDjvNXc483E2v_G2FQwZGYLY3OBtU6ai9fDqB1KBq2tBaT6Q-C2BIXmw5xyY70Rbvq3Um4y_jVIoMIZS64-keBQK8lqHTB8sh5rHK5xyIbeHogVRgB0t9HVP5I0OElcsfooraybTJaWchSz3Fff2iPKtFfjf8mWz7wMIyLAyy16l0svzEleFiBWySm3TGlN785Vy0kA.jpg"
+                                    alt="Suno Bot Logo" class="bot-avatar-img">
+                                <span class="tg-indicator-badge">
+                                    <i class="bi bi-telegram"></i>
+                                </span>
+                            </div>
+
+                            <div class="tg-text-center">
+                                <h3 class="tg-title-center">Download Unlimited Suno AI Songs on Telegram</h3>
+                                <p class="tg-subtitle-center">No queue, one-click instant audio & stem downloads
+                                    directly inside your Telegram app.</p>
+                            </div>
+
+                            <a href="https://t.me/SunoAiSongDownloadBot" target="_blank" rel="noopener noreferrer"
+                                class="btn-tg-action-center">
+                                <i class="bi bi-robot"></i>
+                                <span>Open Telegram Bot</span>
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
         </section>
@@ -512,18 +452,8 @@
     <footer class="studio-footer">
         <div class="container">
             <div class="footer-inner">
-                <div class="d-flex align-items-center gap-2">
-                    <span class="brand-mark small"><i class="bi bi-soundwave"></i></span>
-                    <div>
-                        <strong>Suno Studio</strong>
-                        <small>Audio Toolkit</small>
-                    </div>
-                </div>
                 <div class="footer-copy">
                     Built for simple, fast audio processing.
-                </div>
-                <div class="footer-status">
-                    <span class="status-dot"></span> System ready
                 </div>
             </div>
         </div>

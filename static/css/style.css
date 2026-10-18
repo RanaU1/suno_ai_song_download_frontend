@@ -8,7 +8,7 @@
     --bg: #06111f;
     --bg-2: #0a1728;
 
-    --surface: rgba(13, 28, 48, .88);
+    --surface: rgba(121, 172, 240, 0.88);
     --surface-strong: #102238;
     --surface-soft: rgba(255, 255, 255, .045);
 
@@ -23,7 +23,7 @@
     --sky: #38bdf8;
     --sky-light: #7dd3fc;
     --blue: #3b82f6;
-    --blue-deep: #2563eb;
+    --blue-deep: #7995d3;
     --cyan: #22d3ee;
     --indigo: #6366f1;
     --green: #34d399;
@@ -60,11 +60,6 @@ body {
     color: var(--text);
     font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-    background:
-        radial-gradient(circle at 12% 4%, rgba(56, 189, 248, .13), transparent 30rem),
-        radial-gradient(circle at 88% 17%, rgba(59, 130, 246, .13), transparent 34rem),
-        radial-gradient(circle at 50% 90%, rgba(34, 211, 238, .07), transparent 32rem),
-        linear-gradient(180deg, #06101e 0%, #081425 48%, #050d19 100%);
 }
 
 a {
@@ -83,10 +78,6 @@ input:focus-visible {
     outline-offset: 3px;
 }
 
-
-/* =========================================================
-   BACKGROUND DECORATION
-   ========================================================= */
 
 .bg-grid {
     position: fixed;
@@ -124,7 +115,7 @@ input:focus-visible {
 .bg-orb-2 {
     top: 620px;
     right: -260px;
-    background: #2563eb;
+    background: #3bbfe7;
 }
 
 
@@ -132,33 +123,21 @@ input:focus-visible {
    NAVBAR
    ========================================================= */
 
-.studio-nav {
-    position: relative;
-    z-index: 20;
-    padding: 16px 0;
-
-    background: rgba(5, 14, 27, .72);
-    border-bottom: 1px solid rgba(148, 197, 255, .08);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
 
 .navbar-brand {
     color: #fff !important;
     line-height: 1;
 }
 
-.navbar-brand strong,
-.footer-inner strong {
+.navbar-brand strong {
+    color: red;
     display: block;
     font-size: 16px;
     font-weight: 800;
     letter-spacing: -.25px;
 }
 
-.navbar-brand small,
-.footer-inner small {
+.navbar-brand small {
     display: block;
     margin-top: 4px;
 
@@ -173,10 +152,12 @@ input:focus-visible {
     color: #b9cbe0 !important;
     font-size: 14px;
     font-weight: 600;
+    transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .nav-link:hover {
-    color: #fff !important;
+    color: #e70909 !important;
+    transform: scale(1.5);
 }
 
 .navbar-toggler {
@@ -284,32 +265,6 @@ input:focus-visible {
     box-shadow: 0 6px 18px rgba(37, 99, 235, .28);
 }
 
-.hero-title {
-    margin: 22px auto 14px;
-    max-width: 900px;
-
-    font-size: clamp(44px, 7vw, 78px);
-    line-height: .98;
-    letter-spacing: -3.5px;
-    font-weight: 800;
-}
-
-.hero-title span {
-    display: block;
-
-    color: transparent;
-    background: var(--sky-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
-.hero-subtitle {
-    max-width: 700px;
-
-    color: var(--muted);
-    font-size: 17px;
-    line-height: 1.7;
-}
 
 .hero-pills {
     display: flex;
@@ -481,17 +436,6 @@ input:focus-visible {
    URL INPUT
    ========================================================= */
 
-.input-label {
-    display: flex;
-    justify-content: space-between;
-
-    margin: 0 3px 8px;
-
-    color: #b8cbe0;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-}
 
 .input-hint {
     color: var(--muted-2);
@@ -1235,172 +1179,11 @@ input:focus-visible {
    PRIVACY / EPHEMERAL NOTE
    ========================================================= */
 
-.privacy-note {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-
-    margin-top: 15px;
-    padding: 14px 16px;
-
-    border: 1px solid rgba(52, 211, 153, .12);
-    border-radius: 15px;
-
-    background: rgba(52, 211, 153, .035);
-}
-
-.privacy-icon {
-    display: grid;
-    width: 34px;
-    height: 34px;
-    flex: 0 0 34px;
-    place-items: center;
-
-    border-radius: 9px;
-
-    color: #6ee7b7;
-    background: rgba(52, 211, 153, .09);
-}
-
-.privacy-note strong {
-    font-size: 11px;
-}
-
-.privacy-note p {
-    margin: 3px 0 0;
-
-    color: var(--muted-2);
-    font-size: 10px;
-    line-height: 1.4;
-}
-
 .privacy-check {
     margin-left: auto;
     color: #34d399;
 }
 
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
-
-.history-section {
-    margin-top: 38px;
-}
-
-.history-heading {
-    margin-bottom: 15px;
-}
-
-.history-list {
-    display: grid;
-    gap: 9px;
-}
-
-.history-item {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-
-    min-width: 0;
-    padding: 12px 13px;
-
-    border: 1px solid var(--border);
-    border-radius: 13px;
-
-    background: rgba(255, 255, 255, .03);
-}
-
-.history-item.is-inst {
-    border-color: rgba(34, 211, 238, .17);
-}
-
-.history-item.is-vocal {
-    border-color: rgba(56, 189, 248, .17);
-}
-
-.history-item.is-sample {
-    border-color: rgba(99, 102, 241, .17);
-}
-
-.history-name {
-    min-width: 0;
-    flex: 1;
-    overflow: hidden;
-
-    color: #dbe8f5;
-    font-size: 12px;
-    font-weight: 600;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.history-badge {
-    display: inline-block;
-
-    margin-right: 5px;
-    padding: 4px 7px;
-
-    border-radius: 6px;
-
-    font-size: 8px;
-    font-weight: 800;
-    vertical-align: middle;
-}
-
-.history-badge.inst {
-    color: #67e8f9;
-    background: rgba(34, 211, 238, .10);
-}
-
-.history-badge.vocal {
-    color: #7dd3fc;
-    background: rgba(56, 189, 248, .10);
-}
-
-.history-badge.sample {
-    color: #a5b4fc;
-    background: rgba(99, 102, 241, .12);
-}
-
-.history-badge.wav {
-    color: #fdba74;
-    background: rgba(251, 146, 60, .10);
-}
-
-.history-badge.mp3 {
-    color: #cbd5e1;
-    background: rgba(255, 255, 255, .08);
-}
-
-.history-badge.m4a {
-    color: #67e8f9;
-    background: rgba(34, 211, 238, .09);
-}
-
-.history-btn {
-    flex: 0 0 auto;
-
-    padding: 8px 11px;
-
-    border: 1px solid var(--border);
-    border-radius: 8px;
-
-    color: #dbe5f1;
-    background: rgba(255, 255, 255, .06);
-
-    font-size: 10px;
-    font-weight: 800;
-
-    transition: .2s ease;
-}
-
-.history-btn:hover {
-    border-color: rgba(125, 211, 252, .25);
-    background: rgba(56, 189, 248, .08);
-    color: #fff;
-}
 
 
 /* =========================================================
@@ -1428,15 +1211,6 @@ input:focus-visible {
     font-size: 11px;
 }
 
-.footer-status {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-
-    color: #6ee7b7;
-    font-size: 10px;
-    font-weight: 700;
-}
 
 
 /* =========================================================
@@ -1483,19 +1257,6 @@ input:focus-visible {
         display: none;
     }
 
-    /* .hero-section {
-        padding: 48px 0 32px;
-    } */
-
-    .hero-title {
-        font-size: clamp(38px, 12vw, 60px);
-        letter-spacing: -2px;
-    }
-
-    .hero-subtitle {
-        font-size: 14px;
-        line-height: 1.65;
-    }
 
     .hero-pills span {
         font-size: 10px;
@@ -1670,9 +1431,6 @@ input:focus-visible {
         font-size: 12px;
     }
 
-    .privacy-note {
-        align-items: flex-start;
-    }
 
     .privacy-check {
         display: none;
