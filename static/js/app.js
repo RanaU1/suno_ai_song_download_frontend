@@ -6,6 +6,54 @@ let currentFilename = "";
 let currentTotalDuration = 0;
 let selectedPreset = "auto";
 
+// ---------- Server status (yellow = connecting, green = online, red = error) ----------
+const HEALTH_URL = `${API_BASE_URL}/api/health`;
+const STATUS_TEXT = {
+    checking: 'Connecting to Server…',
+    online: 'Server Ready',
+    offline: 'Server Error — Contact Admin'
+};
+let serverState = '';
+
+function setServerStatus(state) {
+    const pill = document.getElementById('serverStatus');
+    if (!pill || state === serverState) return;
+    serverState = state;
+    pill.classList.remove('is-checking', 'is-online', 'is-offline');
+    pill.classList.add('is-' + state);
+    pill.querySelector('.status-text').textContent = STATUS_TEXT[state];
+    pill.title = state === 'offline' ? 'Click to try again' : '';
+}
+
+async function checkServer({ silent = false, visit = false } = {}) {
+    if (!silent) setServerStatus('checking');
+    const started = Date.now();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    let ok = false;
+    try {
+
+        const url = visit ? `${HEALTH_URL}?visit=1` : HEALTH_URL;
+        const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
+
+        ok = res.ok;
+    } catch (e) {
+        ok = false;
+    } finally {
+        clearTimeout(timer);
+    }
+    // keep the yellow state visible for a moment so it does not just flash
+    const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
+    setTimeout(() => setServerStatus(ok ? 'online' : 'offline'), wait);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const pill = document.getElementById('serverStatus');
+    if (pill) pill.addEventListener('click', () => { if (serverState === 'offline') checkServer(); });
+    checkServer({ visit: true });
+    setInterval(() => checkServer({ silent: true }), 30000);
+});
+
 function setWave(id, isPlaying) {
     const el = document.getElementById(id);
     if (el) {
@@ -108,7 +156,7 @@ async function startDownload() {
         try { audioPlayer.load(); } catch (e) { }
 
         const dlLink = document.getElementById('resDownloadLink');
-        dlLink.href = data.download_url;
+        dlLink.href = `${API_BASE_URL}${data.download_url}`;
         dlLink.setAttribute('download', data.filename);
         dlLink.innerHTML = `📥 Save Full Song (${(data.format || selectedFormat).toUpperCase()})`;
 
@@ -126,6 +174,7 @@ async function startDownload() {
     } catch (err) {
         console.error(err);
         const isAbort = err.name === 'AbortError';
+        if (err instanceof TypeError) setServerStatus('offline');
         const msg = isAbort ? 'The server took too long to respond. Check whether the file is already in the list below.' : err.message;
         alert('Notice: ' + msg);
         statusBadge.innerText = '⚠️ ' + msg;
@@ -298,7 +347,7 @@ async function loadHistory() {
             item.className = itemClass;
             item.innerHTML = `
                         <span class="history-name">${badge} ${f.name}</span>
-                        <a class="history-btn" href="/downloads/${encodeURIComponent(f.filename)}" download>Download</a>
+                        <a class="history-btn" href="${API_BASE_URL}/downloads/${encodeURIComponent(f.filename)}" download>Download</a>
                     `;
             list.appendChild(item);
         });
