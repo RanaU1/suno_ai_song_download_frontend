@@ -15,6 +15,7 @@ const SITE = {
     email: 'contact@sunoaisongdownload.online',
     telegramUser: 'PythonLearningPerson',       // Telegram username, no @
     botUser: 'SunoAiSongDownloadBot',
+    whatsapp: '917044394156',   // CHANGE ME: country code + number, digits only
     updated: '19 October 2026'                    // shown on the legal pages
 };
 
@@ -39,7 +40,9 @@ function fillSiteData() {
         const href = {
             email: `mailto:${SITE.email}`,
             telegram: `https://t.me/${SITE.telegramUser}`,
-            bot: `https://t.me/${SITE.botUser}`
+            bot: `https://t.me/${SITE.botUser}`,
+            whatsapp: `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi, I am writing about Suno Ai Song Download')}`
+
         }[el.dataset.siteLink];
         if (href) el.href = href;
     });
@@ -226,6 +229,15 @@ async function hydrate(el) {
     afterIncludes();
 })();
 
+
+// Delegated: works even after the navbar is replaced
+document.addEventListener('click', e => {
+    if (!e.target.closest('#serverStatus')) return;
+    const now = Date.now();
+    if (now - lastManualCheck < 10000) return;   // 10s cooldown so nobody can spam your Telegram alerts
+    lastManualCheck = now;
+    checkServer({ visit: true });                // explicit visit=1 + health check
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const pill = document.getElementById('serverStatus');

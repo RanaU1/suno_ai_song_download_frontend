@@ -328,6 +328,22 @@
     margin-bottom: 0;
 }
 
+.info-card {
+    position: relative;
+    /* required so the link covers the whole card */
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(14, 165, 233, .15);
+    border-color: rgba(14, 165, 233, .4);
+    cursor: pointer;
+}
+
+
+
+
 .link-arrow {
     display: inline-flex;
     align-items: center;
