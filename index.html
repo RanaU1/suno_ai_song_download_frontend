@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="./static/css/style.css">
+    <link rel="stylesheet" href="./static/css/pages.css">
 </head>
 
 <body>
@@ -20,37 +21,11 @@
     <div class="bg-orb bg-orb-2"></div>
     <div class="bg-grid"></div>
 
-    <nav class="navbar navbar-expand-lg studio-nav">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <span class="brand-mark"><i class="bi bi-soundwave"></i></span>
-                <span>
-                    <strong>Suno Ai Song Download</strong>
-                    <small>Create & Download Suno Ai Songs</small>
-                </span>
-            </a>
+    <div id="site-nav" data-include="/components/navbar.html"></div>
 
-            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#mainNav">
-                <i class="bi bi-list fs-2"></i>
-            </button>
 
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-                    <li class="nav-item ms-lg-2">
-                        <button type="button" class="server-status-pill nav-status is-checking" id="serverStatus"
-                            role="status" aria-live="polite">
-                            <span class="status-dot"></span>
-                            <span class="status-text">Connecting to server…</span>
-                        </button>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#download">Downloader</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tools">Audio Tools</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#history">History</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+
+
 
     <main>
 
@@ -451,17 +426,11 @@
         </section>
     </main>
 
-    <footer class="studio-footer">
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-copy">
-                    Built for simple, fast audio processing.
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="site-footer" data-include="/components/footer.html">
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./static/js/site.js"></script>
     <script src="./static/js/app.js"></script>
 </body>
 

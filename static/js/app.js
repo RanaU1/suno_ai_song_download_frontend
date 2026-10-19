@@ -1,49 +1,8 @@
-// const API_BASE_URL = "http://localhost:9999";
-const API_BASE_URL = "https://api.sunoaisongdownload.online";
 
 let selectedFormat = "m4a";
 let currentFilename = "";
 let currentTotalDuration = 0;
 let selectedPreset = "auto";
-
-// ---------- Server status (yellow = connecting, green = online, red = error) ----------
-const HEALTH_URL = `${API_BASE_URL}/api/health`;
-const STATUS_TEXT = {
-    checking: 'Connecting to Server…',
-    online: 'Server Ready',
-    offline: 'Server Error — Contact Admin'
-};
-let serverState = '';
-
-function setServerStatus(state) {
-    const pill = document.getElementById('serverStatus');
-    if (!pill || state === serverState) return;
-    serverState = state;
-    pill.classList.remove('is-checking', 'is-online', 'is-offline');
-    pill.classList.add('is-' + state);
-    pill.querySelector('.status-text').textContent = STATUS_TEXT[state];
-    pill.title = state === 'offline' ? 'Click to try again' : '';
-}
-
-async function checkServer({ silent = false, visit = false } = {}) {
-    if (!silent) setServerStatus('checking');
-    const started = Date.now();
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 8000);
-    let ok = false;
-    try {
-        const url = visit ? `${HEALTH_URL}?${getVisitQuery()}` : HEALTH_URL;
-        const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
-        ok = res.ok;
-    } catch (e) {
-        ok = false;
-    } finally {
-        clearTimeout(timer);
-    }
-    // keep the yellow state visible for a moment so it does not just flash
-    const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
-    setTimeout(() => setServerStatus(ok ? 'online' : 'offline'), wait);
-}
 function getVisitQuery() {
     const p = new URLSearchParams({ visit: '1' });
     p.set('screen', `${screen.width}x${screen.height}`);
@@ -53,12 +12,6 @@ function getVisitQuery() {
     p.set('tz', Intl.DateTimeFormat().resolvedOptions().timeZone || '');
     return p.toString();
 }
-document.addEventListener('DOMContentLoaded', () => {
-    const pill = document.getElementById('serverStatus');
-    if (pill) pill.addEventListener('click', () => { if (serverState === 'offline') checkServer(); });
-    checkServer({ visit: true });
-    setInterval(() => checkServer({ silent: true }), 30000);
-});
 
 function setWave(id, isPlaying) {
     const el = document.getElementById(id);
@@ -309,10 +262,15 @@ async function generateSample() {
 }
 
 async function loadHistory() {
+    const list = document.getElementById('historyList');
+    if (!list) {
+        console.log("No history section on this page, nothing to load.")
+        return;
+    }
+
     try {
         const res = await fetch(`${API_BASE_URL}/api/files`);
         const files = await res.json();
-        const list = document.getElementById('historyList');
         list.innerHTML = '';
 
         if (files.length === 0) {
