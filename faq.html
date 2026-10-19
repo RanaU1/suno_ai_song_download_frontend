@@ -23,8 +23,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/pages.css">
-    <script
-        type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is this website?", "acceptedAnswer": {"@type": "Answer", "text": "A free tool that downloads public Suno songs from their share link as MP3, M4A or WAV. It can also split a song into instrumental and vocals, and cut a short preview sample. It is an independent project and is not affiliated with Suno."}}, {"@type": "Question", "name": "How do I download a song?", "acceptedAnswer": {"@type": "Answer", "text": "Open the song on Suno, copy its share link, paste it into the box on the home page, choose a format and press Download Song. The full steps are on the How it works page."}}, {"@type": "Question", "name": "Which links work?", "acceptedAnswer": {"@type": "Answer", "text": "Public Suno share links, for example https://suno.com/s/XXXXXXXXXXXX. The song has to be public: private songs and links that need a login cannot be downloaded. If a link is rejected, open the song on Suno and use Share → Copy link to get a fresh one."}}, {"@type": "Question", "name": "Which format should I choose: MP3, M4A or WAV?", "acceptedAnswer": {"@type": "Answer", "text": "MP3 plays everywhere. M4A is the default: small files with very good quality, great for phones. WAV is uncompressed and very large, useful if you plan to edit the audio. WAV is made from the same source audio, so it is bigger, not better: it cannot add detail that was never there."}}, {"@type": "Question", "name": "Is it free? Do I need an account?", "acceptedAnswer": {"@type": "Answer", "text": "The website is free and needs no account, no sign-in and no email address."}}, {"@type": "Question", "name": "How long are my files kept?", "acceptedAnswer": {"@type": "Answer", "text": "Only for a few minutes. Songs, covers, stems and samples are created for you on request and are removed from the server automatically, usually within about five minutes. Save your file right after it appears. Details are in the Privacy policy."}}, {"@type": "Question", "name": "What does “Separate into track and vocals” do?", "acceptedAnswer": {"@type": "Answer", "text": "It splits the song into an instrumental and a vocals-only file using audio signal processing. It is a quick approximation, not a studio-grade result: you may still hear a little vocal in the instrumental, and the other way round."}}, {"@type": "Question", "name": "What is the sample tool?", "acceptedAnswer": {"@type": "Answer", "text": "It cuts a short preview clip from your song with a fade at the end. Pick a preset length (auto, 30 seconds, 1 minute, 2 minutes or half the song) and press Generate sample."}}, {"@type": "Question", "name": "My download failed or took too long. What can I do?", "acceptedAnswer": {"@type": "Answer", "text": "Check that the song is public and the link is complete, then try again. If the server was busy the request may time out after about a minute. The coloured dot in the menu shows the server state, and the status page shows it in detail. If it stays red or the problem continues, contact us."}}, {"@type": "Question", "name": "Can I use the downloaded song commercially?", "acceptedAnswer": {"@type": "Answer", "text": "This website gives you no rights to any song. What you may do with a Suno song depends on Suno’s terms and on the plan the song was created under. Please read Suno’s own terms before you publish or sell anything. See also the Disclaimer."}}, {"@type": "Question", "name": "Do you track me?", "acceptedAnswer": {"@type": "Answer", "text": "No accounts, no ads and no analytics trackers. We only handle the technical data needed to run the service and to deal with abuse, such as someone sending a very large number of requests. The Privacy policy explains exactly what is and is not collected."}}, {"@type": "Question", "name": "Is there a Telegram bot?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Send a Suno link to the bot and it sends the audio back inside Telegram. See the Telegram bot page."}}, {"@type": "Question", "name": "Does it work on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, the site is built for phones too. After pressing Save Full Song, your browser saves the file to the usual Downloads location (on iPhone, in the Files app)."}}, {"@type": "Question", "name": "I own a song and want it removed, or I found a problem.", "acceptedAnswer": {"@type": "Answer", "text": "Please write to us from the Contact page. Files are deleted automatically within minutes and nothing is published, but we will gladly help."}}]}</script>
+
 </head>
 
 <body>
@@ -38,8 +37,6 @@
     <main>
         <section class="page-hero">
             <div class="container">
-                <h1>Faq from index.html</h1>
-
                 <span class="page-kicker"><i class="bi bi-question-circle-fill"></i> FAQ</span>
                 <h1>Answers to the <em>most asked</em> questions</h1>
                 <p class="lead">Formats, file lifetime, link problems and more. Can’t find yours? Write to us.</p>
@@ -58,10 +55,13 @@
                                         website?</button>
                                 </h2>
                                 <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqList">
-                                    <div class="accordion-body">A free tool that downloads <strong>public Suno
-                                            songs</strong> from their share link as MP3, M4A or WAV. It can also split a
-                                        song into instrumental and vocals, and cut a short preview sample. It is an
-                                        independent project and is <strong>not affiliated with Suno</strong>.</div>
+                                    <div class="accordion-body">
+                                        <p>🎵 A free tool that downloads <strong>public Suno songs</strong> from their
+                                            share link as MP3, M4A or WAV. It can also split a song into instrumental
+                                            and vocals ✂️ and cut a short preview sample.</p>
+                                        <p>It is an independent project and is <strong>not affiliated with
+                                                Suno</strong>.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
@@ -71,10 +71,12 @@
                                         download a song?</button>
                                 </h2>
                                 <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">Open the song on Suno, copy its share link, paste it
-                                        into the box on the <a href="/#download">home page</a>, choose a format and
-                                        press <strong>Download Song</strong>. The full steps are on the <a
-                                            href="/how-it-works.html">How it works</a> page.</div>
+                                    <div class="accordion-body">
+                                        <p>📋 Open the song on Suno, copy its share link and paste it into the box on
+                                            the <a href="/#download">home page</a>.</p>
+                                        <p>⬇️ Choose a format and press <strong>Download Song</strong>. The full steps
+                                            are on the <a href="/how-it-works.html">How it works</a> page.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
@@ -84,10 +86,12 @@
                                         work?</button>
                                 </h2>
                                 <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">Public Suno share links, for example
-                                        <code>https://suno.com/s/XXXXXXXXXXXX</code>. The song has to be public: private
-                                        songs and links that need a login cannot be downloaded. If a link is rejected,
-                                        open the song on Suno and use <em>Share → Copy link</em> to get a fresh one.
+                                    <div class="accordion-body">
+                                        <p>🔗 Public Suno share links, for example
+                                            <code>https://suno.com/s/XXXXXXXXXXXX</code>.</p>
+                                        <p>The song has to be public: private songs and links that need a login cannot
+                                            be downloaded. If a link is rejected, open the song on Suno and use
+                                            <em>Share → Copy link</em> to get a fresh one.</p>
                                     </div>
                                 </div>
                             </div>
@@ -98,11 +102,14 @@
                                         should I choose: MP3, M4A or WAV?</button>
                                 </h2>
                                 <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body"><strong>MP3</strong> plays everywhere.
-                                        <strong>M4A</strong> is the default: small files with very good quality, great
-                                        for phones. <strong>WAV</strong> is uncompressed and very large, useful if you
-                                        plan to edit the audio. WAV is made from the same source audio, so it is bigger,
-                                        not better: it cannot add detail that was never there.</div>
+                                    <div class="accordion-body">
+                                        <p>🎧 <strong>MP3</strong> plays everywhere. <strong>M4A</strong> is the
+                                            default: small files with very good quality, great for phones.
+                                            <strong>WAV</strong> is uncompressed and very large, useful if you plan to
+                                            edit the audio.</p>
+                                        <p>WAV is made from the same source audio, so it is bigger, not better: it
+                                            cannot add detail that was never there.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
@@ -112,123 +119,209 @@
                                         I need an account?</button>
                                 </h2>
                                 <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">The website is free and needs no account, no sign-in and
-                                        no email address.</div>
+                                    <div class="accordion-body">
+                                        <p>🎉 <strong>Yes, it is free, and you do not need an account.</strong> Just
+                                            paste a link and download.</p>
+                                        <p>🔐 <strong>Coming soon:</strong> an optional login with your <strong>email or
+                                                phone number</strong>. Signed-in users will get <strong>faster
+                                                speed</strong>, <strong>higher-quality and larger downloads</strong> and
+                                            a saved list of their files 📂.</p>
+                                        <p>The free version without an account will stay available.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">How long are
-                                        my files kept?</button>
+                                        data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">Is there a
+                                        premium plan?</button>
                                 </h2>
                                 <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">Only for a few minutes. Songs, covers, stems and samples
-                                        are created for you on request and are removed from the server automatically,
-                                        usually within about five minutes. Save your file right after it appears.
-                                        Details are in the <a href="/privacy.html">Privacy policy</a>.</div>
+                                    <div class="accordion-body">
+                                        <p>🚀 <strong>Coming soon.</strong> We are building a premium plan for people
+                                            who download a lot:</p>
+                                        <ul>
+                                            <li>♾️ <strong>Unlimited</strong> song downloads</li>
+                                            <li>⚡ Priority processing, with a goal of <strong>about 5 to 10
+                                                    seconds</strong> per song</li>
+                                            <li>💎 Higher-quality and larger files</li>
+                                            <li>📂 A saved list of your files</li>
+                                        </ul>
+                                        <p>Want to hear when it opens? 💬 Message us on <a data-site-link="telegram"
+                                                href="#" target="_blank" rel="noopener noreferrer">Telegram</a> or write
+                                            to <a data-site-link="email" data-site="email" href="#"></a>.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7">What does
-                                        “Separate into track and vocals” do?</button>
+                                        data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7">How long are
+                                        my files kept?</button>
                                 </h2>
                                 <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">It splits the song into an <strong>instrumental</strong>
-                                        and a <strong>vocals-only</strong> file using audio signal processing. It is a
-                                        quick approximation, not a studio-grade result: you may still hear a little
-                                        vocal in the instrumental, and the other way round.</div>
+                                    <div class="accordion-body">
+                                        <p>⏱️ Only for a few minutes. Songs, covers, stems and samples are created for
+                                            you on request and are removed from the server automatically, usually within
+                                            about five minutes. Save your file right after it appears.</p>
+                                        <p>💡 Want your songs to stay in one place? Use the Telegram bot: the audio is
+                                            sent to your own chat and stays there. Details are in the <a
+                                                href="/privacy.html">Privacy policy</a>.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq8" aria-expanded="false" aria-controls="faq8">What is the
-                                        sample tool?</button>
+                                        data-bs-target="#faq8" aria-expanded="false" aria-controls="faq8">Will it slow
+                                        down my phone or use a lot of data?</button>
                                 </h2>
                                 <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">It cuts a short preview clip from your song with a fade
-                                        at the end. Pick a preset length (auto, 30 seconds, 1 minute, 2 minutes or half
-                                        the song) and press <strong>Generate sample</strong>.</div>
+                                    <div class="accordion-body">
+                                        <p>⚡ No, it is <strong>very lightweight</strong>. <strong>All the heavy work is
+                                                done on our server</strong>: fetching the song, converting it and
+                                            splitting it into vocals and instrumental.</p>
+                                        <p>📱 Your phone or computer only plays and saves the finished file, so it stays
+                                            light on battery and storage and works on older devices too.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq9" aria-expanded="false" aria-controls="faq9">My download
-                                        failed or took too long. What can I do?</button>
+                                        data-bs-target="#faq9" aria-expanded="false" aria-controls="faq9">What does
+                                        “Separate into track and vocals” do?</button>
                                 </h2>
                                 <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">Check that the song is public and the link is complete,
-                                        then try again. If the server was busy the request may time out after about a
-                                        minute. The coloured dot in the menu shows the server state, and the <a
-                                            href="/status.html">status page</a> shows it in detail. If it stays red or
-                                        the problem continues, <a href="/contact.html">contact us</a>.</div>
+                                    <div class="accordion-body">
+                                        <p>🎤 It splits the song into an <strong>instrumental</strong> and a
+                                            <strong>vocals-only</strong> file using audio signal processing.</p>
+                                        <p>It is a quick approximation, not a studio-grade result: you may still hear a
+                                            little vocal in the instrumental, and the other way round.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq10" aria-expanded="false" aria-controls="faq10">Can I use
-                                        the downloaded song commercially?</button>
+                                        data-bs-target="#faq10" aria-expanded="false" aria-controls="faq10">What is the
+                                        sample tool?</button>
                                 </h2>
                                 <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">This website gives you <strong>no rights</strong> to any
-                                        song. What you may do with a Suno song depends on Suno’s terms and on the plan
-                                        the song was created under. Please read Suno’s own terms before you publish or
-                                        sell anything. See also the <a href="/disclaimer.html">Disclaimer</a>.</div>
+                                    <div class="accordion-body">
+                                        <p>✂️ It cuts a short preview clip from your song with a fade at the end. Pick a
+                                            preset length (auto, 30 seconds, 1 minute, 2 minutes or half the song) and
+                                            press <strong>Generate sample</strong>.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq11" aria-expanded="false" aria-controls="faq11">Do you track
-                                        me?</button>
-                                </h2>
-                                <div id="faq11" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">No accounts, no ads and no analytics trackers. We only
-                                        handle the technical data needed to run the service and to deal with abuse, such
-                                        as someone sending a very large number of requests. The <a
-                                            href="/privacy.html">Privacy policy</a> explains exactly what is and is not
-                                        collected.</div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq12" aria-expanded="false" aria-controls="faq12">Is there a
+                                        data-bs-target="#faq11" aria-expanded="false" aria-controls="faq11">Is there a
                                         Telegram bot?</button>
                                 </h2>
-                                <div id="faq12" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">Yes. Send a Suno link to the bot and it sends the audio
-                                        back inside Telegram. See the <a href="/telegram-bot.html">Telegram bot</a>
-                                        page.</div>
+                                <div id="faq11" class="accordion-collapse collapse" data-bs-parent="#faqList">
+                                    <div class="accordion-body">
+                                        <p>🤖 Yes, and it is the <strong>fastest and easiest</strong> way. Send a Suno
+                                            link to the bot and the audio comes back inside Telegram ⚡.</p>
+                                        <p>📂 Your songs stay in your own chat, so they are always with you. 🎬 You can
+                                            also <strong>merge songs</strong> and <strong>make a video from a
+                                                song</strong> right there.</p>
+                                        <p><a data-site-link="bot" href="#" target="_blank"
+                                                rel="noopener noreferrer">Open the bot</a> or see the <a
+                                                href="/telegram-bot.html">Telegram bot</a> page.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq13" aria-expanded="false" aria-controls="faq13">Does it work
-                                        on my phone?</button>
+                                        data-bs-target="#faq12" aria-expanded="false" aria-controls="faq12">Can I use
+                                        the downloaded song commercially?</button>
+                                </h2>
+                                <div id="faq12" class="accordion-collapse collapse" data-bs-parent="#faqList">
+                                    <div class="accordion-body">
+                                        <p>📜 This website gives you <strong>no rights</strong> to any song. Whether a
+                                            song may be used commercially is decided by <strong>Suno’s terms and the
+                                                plan the song was created under</strong>, so please check them before
+                                            you publish or sell anything.</p>
+                                        <p>💼 If you want to use <strong>our service</strong> for business, with many
+                                            songs, higher limits and priority speed, a low-cost <strong>commercial
+                                                plan</strong> is coming soon.
+                                            <!-- when /commercial-license.html exists, link it here --></p>
+                                        <p>See also the <a href="/disclaimer.html">Disclaimer</a>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq13" aria-expanded="false" aria-controls="faq13">My download
+                                        failed or took too long. What can I do?</button>
                                 </h2>
                                 <div id="faq13" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">Yes, the site is built for phones too. After pressing
-                                        <strong>Save Full Song</strong>, your browser saves the file to the usual
-                                        Downloads location (on iPhone, in the Files app).</div>
+                                    <div class="accordion-body">
+                                        <p>🛠️ Check that the song is <strong>public</strong> ✅ and the link is
+                                            complete, then try again 🔄. If the server was busy the request may time out
+                                            after about a minute.</p>
+                                        <p>🟢🟡🔴 The coloured dot in the menu shows the server state, and the <a
+                                                href="/status.html">status page</a> shows it in detail.</p>
+                                        <p>Still stuck? 💬 Message the admin directly on <a data-site-link="telegram"
+                                                href="#" target="_blank" rel="noopener noreferrer">Telegram</a> or write
+                                            to <a data-site-link="email" data-site="email" href="#"></a>. Please include
+                                            the song link and what you saw 📝.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq14" aria-expanded="false" aria-controls="faq14">I own a song
-                                        and want it removed, or I found a problem.</button>
+                                        data-bs-target="#faq14" aria-expanded="false" aria-controls="faq14">Do you track
+                                        me?</button>
                                 </h2>
                                 <div id="faq14" class="accordion-collapse collapse" data-bs-parent="#faqList">
-                                    <div class="accordion-body">Please write to us from the <a
-                                            href="/contact.html">Contact page</a>. Files are deleted automatically
-                                        within minutes and nothing is published, but we will gladly help.</div>
+                                    <div class="accordion-body">
+                                        <p>🔒 No ads and no third-party analytics trackers. Without an account we handle
+                                            only the technical data needed to run the service and to stop abuse, for
+                                            example someone sending a very large number of requests.</p>
+                                        <p>If optional accounts open later, we will explain exactly what an account
+                                            stores (such as your email or phone and your file list) in the <a
+                                                href="/privacy.html">Privacy policy</a> before they go live.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq15" aria-expanded="false" aria-controls="faq15">Does it work
+                                        on my phone?</button>
+                                </h2>
+                                <div id="faq15" class="accordion-collapse collapse" data-bs-parent="#faqList">
+                                    <div class="accordion-body">
+                                        <p>📱 Yes, the site is built for phones too. After pressing <strong>Save Full
+                                                Song</strong>, your browser saves the file to the usual Downloads
+                                            location (on iPhone, in the Files app).</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq16" aria-expanded="false" aria-controls="faq16">How do I
+                                        contact the admin, or ask for a song to be removed?</button>
+                                </h2>
+                                <div id="faq16" class="accordion-collapse collapse" data-bs-parent="#faqList">
+                                    <div class="accordion-body">
+                                        <p>💬 The quickest way is <a data-site-link="telegram" href="#" target="_blank"
+                                                rel="noopener noreferrer">Telegram</a>: message the admin directly. ✉️
+                                            Prefer email? Write to <a data-site-link="email" data-site="email"
+                                                href="#"></a>.</p>
+                                        <p>Please include the song link, the format and what you saw 📝. Files are
+                                            deleted automatically within minutes and nothing is published, but we will
+                                            gladly help. More options are on the <a href="/contact.html">Contact
+                                                page</a>.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
