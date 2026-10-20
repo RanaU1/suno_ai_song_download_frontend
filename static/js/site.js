@@ -5,18 +5,20 @@
    2. Component loader         -> injects components/navbar.html and footer.html
    3. Active menu link         -> underlines the page you are on
    4. Server status pill       -> yellow = connecting, green = online, red = error
+   5. Visit notification       -> visit=1 is sent ONLY on the first health
+                                  check of a browser session
    ========================================================================== */
 
-/* ---------- 1. Settings: CHANGE THE TWO "CHANGE ME" LINES ---------- */
+/* ---------- 1. Settings ---------- */
 const SITE = {
     name: 'Suno Ai Song Download',
     owner: 'RanaUniverse',
     domain: 'sunoaisongdownload.online',
     email: 'contact@sunoaisongdownload.online',
-    telegramUser: 'PythonLearningPerson',       // Telegram username, no @
+    telegramUser: 'PythonLearningPerson', // Telegram username, no @
     botUser: 'SunoAiSongDownloadBot',
-    whatsapp: '917044394156',   // CHANGE ME: country code + number, digits only
-    updated: '19 October 2026'                    // shown on the legal pages
+    whatsapp: '917044394156', // country code + number, digits only (public on the site!)
+    updated: '19 October 2026' // shown on the legal pages
 };
 
 const IS_LOCAL = ['localhost', '127.0.0.1'].includes(location.hostname);
@@ -25,12 +27,9 @@ const API_BASE_URL = IS_LOCAL
     : 'https://api.sunoaisongdownload.online';
 const HEALTH_URL = `${API_BASE_URL}/api/health`;
 
-/* Production default: do NOT tell the backend about page visits.
-   Set to true only while testing your Telegram alerts. */
-const NOTIFY_VISIT = false;
 
 
-/* ---------- 2. Fill {{placeholders}} written as data attributes ---------- */
+/* ---------- 2. Fill data-site / data-site-link / data-year ---------- */
 function fillSiteData() {
     document.querySelectorAll('[data-site]').forEach(el => {
         const v = SITE[el.dataset.site];
@@ -42,7 +41,6 @@ function fillSiteData() {
             telegram: `https://t.me/${SITE.telegramUser}`,
             bot: `https://t.me/${SITE.botUser}`,
             whatsapp: `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hi, I am writing about Suno Ai Song Download')}`
-
         }[el.dataset.siteLink];
         if (href) el.href = href;
     });
@@ -70,43 +68,59 @@ function markActiveLink() {
 /* ---------- 4. Server status pill ---------- */
 const STATUS_TEXT = {
     checking: 'Connecting to server…',
-    online: 'Server ready',
-    offline: 'Server error — contact admin'
+    online: 'Server Ready ✅',
+    offline: 'Server Error ❌ — Contact Admin'
 };
 let serverState = '';
+let checkInFlight = false;   // only one health request at a time
+let lastManualCheck = 0;     // cooldown for clicks on the pill
 
+/* Paint the current serverState onto the pill. Safe to call any time,
+   including right after the navbar HTML has been (re)injected. */
+function renderServerStatus() {
+    const pill = document.getElementById('serverStatus');
+    if (!pill || !serverState) return;
+    pill.classList.remove('is-checking', 'is-online', 'is-offline');
+    pill.classList.add('is-' + serverState);
+    pill.querySelector('.status-text').textContent = STATUS_TEXT[serverState];
+    pill.title = serverState === 'offline' ? 'Click to try again' : '';
+}
 
 function setServerStatus(state) {
-    const pill = document.getElementById('serverStatus');
-    if (!pill || state === serverState) return;
+    if (state === serverState) return;
     serverState = state;
-    pill.classList.remove('is-checking', 'is-online', 'is-offline');
-    pill.classList.add('is-' + state);
-    pill.querySelector('.status-text').textContent = STATUS_TEXT[state];
-    pill.title = state === 'offline' ? 'Click to try again' : '';
+    renderServerStatus();
 }
 
+/* One health check. Returns true (ok), false (failed) or null (skipped
+   because another check was already running). */
 async function checkServer({ silent = false, visit = false } = {}) {
-    if (!silent) setServerStatus('checking');
-    const started = Date.now();
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 8000);
-    let ok = false;
+    if (checkInFlight) return null;
+    checkInFlight = true;
     try {
-        const url = visit ? `${HEALTH_URL}?${getVisitQuery()}` : HEALTH_URL;
-        const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
-        ok = res.ok;
-    } catch (e) {
-        ok = false;
+        if (!silent) setServerStatus('checking');
+        const started = Date.now();
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 8000);
+        let ok = false;
+        try {
+            const url = visit ? `${HEALTH_URL}?${getVisitQuery()}` : HEALTH_URL;
+            const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
+            ok = res.ok;
+        } catch (e) {
+            ok = false;
+        } finally {
+            clearTimeout(timer);
+        }
+        // keep the yellow state visible for a moment so it does not just flash
+        const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
+        if (wait) await new Promise(r => setTimeout(r, wait));
+        setServerStatus(ok ? 'online' : 'offline');
+        return ok;
     } finally {
-        clearTimeout(timer);
+        checkInFlight = false;
     }
-    // keep the yellow state visible for a moment so it does not just flash
-    const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
-    setTimeout(() => setServerStatus(ok ? 'online' : 'offline'), wait);
 }
-
-
 
 function getVisitQuery() {
     const p = new URLSearchParams({ visit: '1' });
@@ -119,66 +133,47 @@ function getVisitQuery() {
 }
 
 
-// function renderServerStatus() {
-//     const pill = document.getElementById('serverStatus');
-//     if (!pill || !serverState) return;
-//     pill.classList.remove('is-checking', 'is-online', 'is-offline');
-//     pill.classList.add('is-' + serverState);
-//     pill.querySelector('.status-text').textContent = STATUS_TEXT[serverState];
-//     pill.title = serverState === 'offline' ? 'Click to try again' : '';
-// }
+/* ---------- 5. Visit notification (first check of a browser session) ---------- */
+function shouldSendVisit() {
+    try {
+        if (sessionStorage.getItem('visitSent')) return false;
+        sessionStorage.setItem('visitSent', '1');
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
 
-// function setServerStatus(state) {
-//     if (state === serverState) return;
-//     serverState = state;
-//     renderServerStatus();
-// }
+function startServerStatus() {
+    const visit = shouldSendVisit();
 
-// /* One health call. Used by the pill and by status.html */
-// async function pingServer(visit = false) {
-//     const controller = new AbortController();
-//     const timer = setTimeout(() => controller.abort(), 8000);
-//     const t0 = performance.now();
-//     try {
-//         const url = visit ? `${HEALTH_URL}?visit=1` : HEALTH_URL;
-//         const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
-//         return { ok: res.ok, ms: Math.round(performance.now() - t0), code: res.status };
-//     } catch (e) {
-//         return { ok: false, ms: null, code: 0 };
-//     } finally {
-//         clearTimeout(timer);
-//     }
-// }
+    checkServer({ visit }).then(ok => {
+        // if the visit request did not succeed, let the next page load try again
+        if (visit && ok !== true) {
+            try { sessionStorage.removeItem('visitSent'); } catch (e) { }
+        }
+    });
 
-// async function checkServer({ silent = false, visit = false } = {}) {
-//     if (!silent) setServerStatus('checking');
-//     const started = Date.now();
-//     const result = await pingServer(visit);
-//     // keep yellow visible for a moment so it does not just flash
-//     const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
-//     setTimeout(() => setServerStatus(result.ok ? 'online' : 'offline'), wait);
-// }
+    // quiet heartbeat every 30s (never visit=1), skipped in background tabs
+    setInterval(() => {
+        if (!document.hidden) checkServer({ silent: true });
+    }, 30000);
 
-// let statusStarted = false;
-// function startServerStatus() {
-//     if (statusStarted || !document.getElementById('serverStatus')) return;
-//     statusStarted = true;
+    // quick re-check when the user comes back to the tab
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) checkServer({ silent: true });
+    });
+}
 
-//     // click on the red pill = try again (delegated, survives menu re-render)
-//     document.addEventListener('click', e => {
-//         if (e.target.closest('#serverStatus') && serverState === 'offline') checkServer();
-//     });
-
-//     let visit = false;
-//     try {
-//         visit = NOTIFY_VISIT && !sessionStorage.getItem('visitSent');
-//         if (visit) sessionStorage.setItem('visitSent', '1');   // once per browser session
-//     } catch (e) { /* storage blocked: no visit flag */ }
-
-//     checkServer({ visit });
-//     // quiet re-check once a minute, and not while the tab is in the background
-//     setInterval(() => { if (!document.hidden) checkServer({ silent: true }); }, 60000);
-// }
+/* Click on the pill = manual re-check. Delegated, so it keeps working
+   after the navbar is replaced. 10s cooldown. Never sends visit=1. */
+document.addEventListener('click', e => {
+    if (!e.target.closest('#serverStatus')) return;
+    const now = Date.now();
+    if (now - lastManualCheck < 10000) return;
+    lastManualCheck = now;
+    checkServer();
+});
 
 
 /* ---------- Component loader (navbar / footer) ----------
@@ -188,8 +183,7 @@ function getVisitQuery() {
 function afterIncludes() {
     fillSiteData();
     markActiveLink();
-    // renderServerStatus();
-    // startServerStatus();
+    renderServerStatus();   // navbar may have just been (re)injected -> repaint the pill
 }
 
 async function hydrate(el) {
@@ -214,7 +208,6 @@ async function hydrate(el) {
 }
 
 (async function initSite() {
-    fillSiteData();
     const slots = [...document.querySelectorAll('[data-include]')];
     // show cached menu/footer immediately
     slots.forEach(el => {
@@ -229,39 +222,8 @@ async function hydrate(el) {
     afterIncludes();
 })();
 
-
-// Delegated: works even after the navbar is replaced
-document.addEventListener('click', e => {
-    if (!e.target.closest('#serverStatus')) return;
-    const now = Date.now();
-    if (now - lastManualCheck < 10000) return;   // 10s cooldown so nobody can spam your Telegram alerts
-    lastManualCheck = now;
-    checkServer({ visit: true });                // explicit visit=1 + health check
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const pill = document.getElementById('serverStatus');
-    if (pill) {
-        pill.addEventListener('click', () => {
-            if (serverState === 'offline') checkServer();
-        });
-    }
-
-    let shouldNotify = false;
-    try {
-        // Use sessionStorage (once per tab session) or localStorage (once forever until cleared)
-        const hasVisited = sessionStorage.getItem('visitSent');
-        if (!hasVisited) {
-            shouldNotify = true;
-            sessionStorage.setItem('visitSent', '1');
-        }
-    } catch (err) {
-        console.warn('Storage access restricted:', err);
-    }
-
-    // First call: true on first page view of the session, false on page changes/refreshes 🚀
-    checkServer({ visit: shouldNotify });
-
-    // Periodic heartbeat every 30s: always false ⏱️
-    setInterval(() => checkServer({ silent: true, visit: false }), 30000);
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startServerStatus);
+} else {
+    startServerStatus();
+}

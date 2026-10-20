@@ -1,16 +1,56 @@
+/* ==========================================================================
+   app.js — home page downloader only
+   Needs site.js to be loaded first (API_BASE_URL, checkServer).
+   ========================================================================== */
 
 let selectedFormat = "m4a";
 let currentFilename = "";
 let currentTotalDuration = 0;
 let selectedPreset = "auto";
-function getVisitQuery() {
-    const p = new URLSearchParams({ visit: '1' });
-    p.set('screen', `${screen.width}x${screen.height}`);
-    p.set('viewport', `${window.innerWidth}x${window.innerHeight}`);
-    p.set('dpr', String(window.devicePixelRatio || 1));
-    p.set('lang', navigator.language || '');
-    p.set('tz', Intl.DateTimeFormat().resolvedOptions().timeZone || '');
-    return p.toString();
+
+/* Escape text before putting it into innerHTML (song titles come from Suno) */
+function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+}
+
+/* POST JSON to the backend. Returns the parsed data or throws an Error
+   with a readable message. Handles timeout, FastAPI "detail" errors and
+   network failures in one place. */
+async function postJson(path, body, timeoutMs = 60000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+        const res = await fetch(`${API_BASE_URL}${path}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+            signal: controller.signal
+        });
+
+        let data = {};
+        try { data = await res.json(); } catch (e) { }
+
+        if (!res.ok || data.error) {
+            const detail = typeof data.detail === 'string' ? data.detail : '';
+            throw new Error(data.error || detail || `Server error (${res.status}).`);
+        }
+        return data;
+    } catch (err) {
+        if (err.name === 'AbortError') {
+            const e = new Error('The server took too long to respond.');
+            e.isTimeout = true;
+            throw e;
+        }
+        if (err instanceof TypeError) {
+            checkServer({ silent: true });   // real check, updates the pill if the server is down
+            throw new Error('Could not reach the server. Please try again.');
+        }
+        throw err;
+    } finally {
+        clearTimeout(timer);
+    }
 }
 
 function setWave(id, isPlaying) {
@@ -23,9 +63,10 @@ function setWave(id, isPlaying) {
 
 function setFormat(fmt) {
     selectedFormat = fmt;
-    document.getElementById('tabMp3').classList.toggle('active', fmt === 'mp3');
-    document.getElementById('tabM4a').classList.toggle('active', fmt === 'm4a');
-    document.getElementById('tabWav').classList.toggle('active', fmt === 'wav');
+    [['tabMp3', 'mp3'], ['tabM4a', 'm4a'], ['tabWav', 'wav']].forEach(([id, f]) => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', fmt === f);
+    });
 }
 
 async function pasteFromClipboard() {
@@ -47,8 +88,8 @@ function selectPreset(preset, btnElement) {
     }
 }
 
-// Allow Enter to be pressed in the input
 document.addEventListener("DOMContentLoaded", () => {
+    // Allow Enter to be pressed in the input
     const inp = document.getElementById('sunoUrl');
     if (inp) {
         inp.addEventListener("keydown", (e) => {
@@ -58,6 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    // Load history once the page is ready
+    loadHistory();
 });
 
 async function startDownload() {
@@ -79,26 +122,13 @@ async function startDownload() {
     statusBadge.style.display = 'block';
     statusBadge.innerText = `Connecting to Suno and decrypting audio (${selectedFormat.toUpperCase()})...`;
 
+    // hide the previous song's results while a new one is processing
+    resultBox.style.display = 'none';
     stemResultBox.style.display = 'none';
     sampleResultBox.style.display = 'none';
 
     try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 60000);
-
-        const response = await fetch(`${API_BASE_URL}/api/download`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: url, format: selectedFormat }),
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        const data = await response.json();
-
-        if (!response.ok || data.error) {
-            throw new Error(data.error || 'Error processing the song.');
-        }
+        const data = await postJson('/api/download', { url: url, format: selectedFormat }, 60000);
 
         currentFilename = data.filename;
         currentTotalDuration = data.duration_seconds || 0;
@@ -132,9 +162,8 @@ async function startDownload() {
 
     } catch (err) {
         console.error(err);
-        const isAbort = err.name === 'AbortError';
-        if (err instanceof TypeError) setServerStatus('offline');
-        const msg = isAbort ? 'The server took too long to respond. Check whether the file is already in the list below.' : err.message;
+        let msg = err.message;
+        if (err.isTimeout) msg += ' Check whether the file is already in the list below.';
         alert('Notice: ' + msg);
         statusBadge.innerText = '⚠️ ' + msg;
         try { await loadHistory(); } catch (e) { }
@@ -161,38 +190,18 @@ async function separateStems() {
     btn.innerHTML = '<div class="spinner"></div> Separating Track and Vocals with DSP...';
 
     try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 90000);
+        const data = await postJson('/api/separate', {
+            filename: currentFilename,
+            format: selectedFormat
+        }, 90000);
 
-        // const response = await fetch('/api/separate', {
-        const response = await fetch(`${API_BASE_URL}/api/separate`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                filename: currentFilename,
-                format: selectedFormat
-            }),
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        const data = await response.json();
-
-        if (!response.ok || data.error) {
-            throw new Error(data.error || 'Error separating the track and vocals.');
-        }
-
-        // instAudio.src = data.instrumental_url;
         instAudio.src = `${API_BASE_URL}${data.instrumental_url}`;
         try { instAudio.load(); } catch (e) { }
-        // instDlLink.href = data.instrumental_url;
         instDlLink.href = `${API_BASE_URL}${data.instrumental_url}`;
         instDlLink.setAttribute('download', data.instrumental_filename);
 
-        // vocalAudio.src = data.vocals_url;
         vocalAudio.src = `${API_BASE_URL}${data.vocals_url}`;
         try { vocalAudio.load(); } catch (e) { }
-        // vocalDlLink.href = data.vocals_url;
         vocalDlLink.href = `${API_BASE_URL}${data.vocals_url}`;
         vocalDlLink.setAttribute('download', data.vocals_filename);
 
@@ -225,26 +234,13 @@ async function generateSample() {
     btn.innerHTML = '<div class="spinner spinner-dark"></div> Trimming sample with FFmpeg...';
 
     try {
-        // const response = await fetch('/api/sample', {
-        const response = await fetch(`${API_BASE_URL}/api/sample`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                filename: currentFilename,
-                preset: selectedPreset
-            })
-        });
+        const data = await postJson('/api/sample', {
+            filename: currentFilename,
+            preset: selectedPreset
+        }, 60000);
 
-        const data = await response.json();
-
-        if (!response.ok || data.error) {
-            throw new Error(data.error || 'Error generating the sample.');
-        }
-
-        // sampleAudio.src = data.sample_url;
         sampleAudio.src = `${API_BASE_URL}${data.sample_url}`;
         try { sampleAudio.load(); } catch (e) { }
-        // sampleDlLink.href = data.sample_url;
         sampleDlLink.href = `${API_BASE_URL}${data.sample_url}`;
         sampleDlLink.setAttribute('download', data.filename);
         sampleLabel.innerText = `🎧 Sample ready (${Math.round(data.sample_duration)}s):`;
@@ -254,6 +250,7 @@ async function generateSample() {
         try { await loadHistory(); } catch (e) { }
 
     } catch (err) {
+        console.error(err);
         alert('Error generating sample: ' + err.message);
     } finally {
         btn.disabled = false;
@@ -264,16 +261,16 @@ async function generateSample() {
 async function loadHistory() {
     const list = document.getElementById('historyList');
     if (!list) {
-        console.log("No history section on this page, nothing to load.")
-        return;
+        return;   // this page has no history section
     }
 
     try {
         const res = await fetch(`${API_BASE_URL}/api/files`);
+        if (!res.ok) throw new Error(`History request failed (${res.status})`);
         const files = await res.json();
         list.innerHTML = '';
 
-        if (files.length === 0) {
+        if (!Array.isArray(files) || files.length === 0) {
             list.innerHTML = '<div style="color:#71717a; font-size:12px; text-align:center;">No recent downloads yet.</div>';
             return;
         }
@@ -310,15 +307,16 @@ async function loadHistory() {
 
             item.className = itemClass;
             item.innerHTML = `
-                        <span class="history-name">${badge} ${f.name}</span>
-                        <a class="history-btn" href="${API_BASE_URL}/downloads/${encodeURIComponent(f.filename)}" download>Download</a>
-                    `;
+                <span class="history-name">${badge} ${escapeHtml(f.name)}</span>
+                <a class="history-btn" href="${API_BASE_URL}/downloads/${encodeURIComponent(f.filename)}" download>Download</a>
+            `;
             list.appendChild(item);
         });
     } catch (e) {
         console.error(e);
     }
 }
+
 function fillSunoExample(url) {
     const input = document.getElementById("sunoUrl");
 
@@ -335,6 +333,3 @@ function fillSunoExample(url) {
         block: "center",
     });
 }
-
-// Load history at startup
-loadHistory();
