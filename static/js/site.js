@@ -116,6 +116,9 @@ async function checkServer({ silent = false, visit = false } = {}) {
         const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
         if (wait) await new Promise(r => setTimeout(r, wait));
         setServerStatus(ok ? 'online' : 'offline');
+        try {
+            sessionStorage.setItem('serverStatusCache', JSON.stringify({ state: ok ? 'online' : 'offline', t: Date.now() }));
+        } catch (e) { }
         return ok;
     } finally {
         checkInFlight = false;
@@ -144,15 +147,30 @@ function shouldSendVisit() {
     }
 }
 
+function recentlyOnline() {
+    try {
+        const c = JSON.parse(sessionStorage.getItem('serverStatusCache'));
+        return !!c && c.state === 'online' && Date.now() - c.t < 30000;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+}
+
+
+
 function startServerStatus() {
     const visit = shouldSendVisit();
 
-    checkServer({ visit }).then(ok => {
-        // if the visit request did not succeed, let the next page load try again
-        if (visit && ok !== true) {
-            try { sessionStorage.removeItem('visitSent'); } catch (e) { }
-        }
-    });
+    if (!visit && recentlyOnline()) {
+        setServerStatus('online');  // checked less than 30s ago, skip the request
+    } else {
+        checkServer({ visit }).then(ok => {
+            if (visit && ok !== true) {
+                try { sessionStorage.removeItem('visitSent'); } catch (e) { }
+            }
+        });
+    }
 
     // quiet heartbeat every 30s (never visit=1), skipped in background tabs
     setInterval(() => {
