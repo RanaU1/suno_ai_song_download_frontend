@@ -28,7 +28,6 @@ const API_BASE_URL = IS_LOCAL
 const HEALTH_URL = `${API_BASE_URL}/api/health`;
 
 
-
 /* ---------- 2. Fill data-site / data-site-link / data-year ---------- */
 function fillSiteData() {
     document.querySelectorAll('[data-site]').forEach(el => {
@@ -92,39 +91,6 @@ function setServerStatus(state) {
     renderServerStatus();
 }
 
-/* One health check. Returns true (ok), false (failed) or null (skipped
-   because another check was already running). */
-async function checkServer({ silent = false, visit = false } = {}) {
-    if (checkInFlight) return null;
-    checkInFlight = true;
-    try {
-        if (!silent) setServerStatus('checking');
-        const started = Date.now();
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 8000);
-        let ok = false;
-        try {
-            const url = visit ? `${HEALTH_URL}?${getVisitQuery()}` : HEALTH_URL;
-            const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
-            ok = res.ok;
-        } catch (e) {
-            ok = false;
-        } finally {
-            clearTimeout(timer);
-        }
-        // keep the yellow state visible for a moment so it does not just flash
-        const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
-        if (wait) await new Promise(r => setTimeout(r, wait));
-        setServerStatus(ok ? 'online' : 'offline');
-        try {
-            sessionStorage.setItem('serverStatusCache', JSON.stringify({ state: ok ? 'online' : 'offline', t: Date.now() }));
-        } catch (e) { }
-        return ok;
-    } finally {
-        checkInFlight = false;
-    }
-}
-
 function getVisitQuery() {
     const p = new URLSearchParams({ visit: '1' });
     p.set('screen', `${screen.width}x${screen.height}`);
@@ -135,37 +101,76 @@ function getVisitQuery() {
     return p.toString();
 }
 
+/* One raw health call. Used by checkServer() and by status.html.
+   Returns { ok, ms, code } and never throws. */
+async function pingServer(visit = false) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    const t0 = performance.now();
+    try {
+        const url = visit ? `${HEALTH_URL}?${getVisitQuery()}` : HEALTH_URL;
+        const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
+        return { ok: res.ok, ms: Math.round(performance.now() - t0), code: res.status };
+    } catch (e) {
+        return { ok: false, ms: null, code: 0 };
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
+/* One health check that also updates the pill.
+   Returns true (ok), false (failed) or null (skipped: another check running). */
+async function checkServer({ silent = false, visit = false } = {}) {
+    if (checkInFlight) return null;
+    checkInFlight = true;
+    try {
+        if (!silent) setServerStatus('checking');
+        const started = Date.now();
+        const result = await pingServer(visit);
+        // keep the yellow state visible for a moment so it does not just flash
+        const wait = silent ? 0 : Math.max(0, 900 - (Date.now() - started));
+        if (wait) await new Promise(r => setTimeout(r, wait));
+        setServerStatus(result.ok ? 'online' : 'offline');
+        try {
+            sessionStorage.setItem('serverStatusCache',
+                JSON.stringify({ state: result.ok ? 'online' : 'offline', t: Date.now() }));
+        } catch (e) { }
+        return result.ok;
+    } finally {
+        checkInFlight = false;
+    }
+}
+
 
 /* ---------- 5. Visit notification (first check of a browser session) ---------- */
 function shouldSendVisit() {
     try {
         if (sessionStorage.getItem('visitSent')) return false;
-        sessionStorage.setItem('visitSent', '1');
+        sessionStorage.setItem('visitSent', '1');   // mark now so a fast reload can't double-send
         return true;
     } catch (err) {
-        return false;
+        return false;                               // storage blocked: do not send visit
     }
 }
 
+/* true if a health check in this tab succeeded less than 30s ago */
 function recentlyOnline() {
     try {
         const c = JSON.parse(sessionStorage.getItem('serverStatusCache'));
         return !!c && c.state === 'online' && Date.now() - c.t < 30000;
     } catch (e) {
-        console.log(e);
         return false;
     }
 }
-
-
 
 function startServerStatus() {
     const visit = shouldSendVisit();
 
     if (!visit && recentlyOnline()) {
-        setServerStatus('online');  // checked less than 30s ago, skip the request
+        setServerStatus('online');   // checked less than 30s ago, skip the request
     } else {
         checkServer({ visit }).then(ok => {
+            // if the visit request did not succeed, let the next page load try again
             if (visit && ok !== true) {
                 try { sessionStorage.removeItem('visitSent'); } catch (e) { }
             }

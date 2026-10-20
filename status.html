@@ -73,7 +73,8 @@
                             <div class="callout mt-4 mb-0 text-start">
                                 <i class="bi bi-info-circle-fill"></i>
                                 <p>Red but your internet works? Wait a minute and check again. If it stays red, please
-                                    <a href="/contact">tell us</a>.</p>
+                                    <a href="/contact">tell us</a>.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -100,8 +101,14 @@
             const btn = el('recheck');
             btn.disabled = true;
             setPill('checking', 'Checking…');
-            const r = await pingServer();       // from site.js
+            let r = { ok: false, ms: null };
+            try {
+                r = await pingServer();
+            } catch (e) {
+                console.error(e);
+            }
             setPill(r.ok ? 'online' : 'offline', r.ok ? 'All systems operational' : 'Server error — contact admin');
+            setServerStatus(r.ok ? 'online' : 'offline');   // navbar pill
             el('mStatus').textContent = r.ok ? 'Online' : 'Unreachable';
             el('mTime').textContent = r.ms != null ? r.ms + ' ms' : '—';
             el('mChecked').textContent = new Date().toLocaleTimeString();
