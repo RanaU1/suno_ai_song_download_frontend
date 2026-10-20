@@ -1,5 +1,4 @@
 <!-- components/navbar.html -->
-
 <nav class="navbar navbar-expand-lg studio-nav">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="/">
@@ -15,16 +14,17 @@
             <i class="bi bi-list fs-2"></i>
         </button>
 
+        <!-- Always visible: own row under the title on mobile, right end of the bar on desktop -->
+        <div class="nav-status-wrap">
+            <button type="button" class="server-status-pill nav-status is-checking" id="serverStatus" role="status"
+                aria-live="polite">
+                <span class="status-dot"></span>
+                <span class="status-text">Connecting to server…</span>
+            </button>
+        </div>
+
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-                <li class="nav-item ms-lg-2">
-                    <!-- site.js drives this pill: yellow = connecting, green = online, red = error -->
-                    <button type="button" class="server-status-pill nav-status is-checking" id="serverStatus"
-                        role="status" aria-live="polite">
-                        <span class="status-dot"></span>
-                        <span class="status-text">Connecting to server…</span>
-                    </button>
-                </li>
                 <li class="nav-item"><a class="nav-link" href="/#download">Downloader</a></li>
                 <li class="nav-item"><a class="nav-link" href="/how-it-works">How it works</a></li>
                 <li class="nav-item"><a class="nav-link" href="/faq">FAQ</a></li>
