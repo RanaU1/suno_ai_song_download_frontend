@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suno Ai Song Download | Suno Ai Song Download</title>
+    <meta name="description" content="Suno Ai Song Download">
+    <link rel="canonical" href="https://sunoaisongdownload.online/">
+    <meta property="og:url" content="https://sunoaisongdownload.online/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Suno Ai Song Download">
+    <meta property="og:title" content="Suno Ai Song Download | Suno Ai Song Download">
+    <meta property="og:description" content="Suno Ai Song Download">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#0ea5e9">
+
+    <link rel="icon" href="/static/favicon.ico">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/pages.css">
+    
+</head>
+
+<body >
+    <!-- Decorative background -->
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-grid"></div>
+
+    <!-- components/navbar.html -->
+<nav class="navbar navbar-expand-lg studio-nav">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+            <span class="brand-mark"><i class="bi bi-soundwave"></i></span>
+            <span>
+                <strong>Suno Ai Song Download</strong>
+                <small>Create &amp; Download Suno Ai Songs</small>
+            </span>
+        </a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-2"></i>
+        </button>
+
+        <!-- Always visible: own row under the title on mobile, right end of the bar on desktop -->
+        <div class="nav-status-wrap">
+            <button type="button" class="server-status-pill nav-status is-checking" id="serverStatus" role="status"
+                aria-live="polite">
+                <span class="status-dot"></span>
+                <span class="status-text">Connecting to server…</span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item"><a class="nav-link" href="/#download">Downloader</a></li>
+                <li class="nav-item"><a class="nav-link" href="/how-it-works">How it works</a></li>
+                <li class="nav-item"><a class="nav-link" href="/faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="/telegram-bot">Telegram bot</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <main>
+        
+
+
+<!-- Main Workspace -->
+<section class="workspace-section" id="download">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-xl-9">
+
+
+
+
+                <div class="workspace-card">
+
+                    <div class="section-heading">
+                        <div class="section-icon gradient-pink">
+                            <i class="bi bi-cloud-arrow-down-fill"></i>
+                        </div>
+                        <div>
+                            <h2>Download Any Suno Ai Songs</h2>
+                            <p>Paste a Public Suno song URL and select your output format.</p>
+                        </div>
+                    </div>
+
+                    <!-- Format selector: IDs intentionally preserved for existing JS -->
+                    <div class="format-selector" role="group" aria-label="Audio format">
+
+                        <button class="format-tab active" id="tabM4a" onclick="setFormat('m4a')">
+                            <i class="bi bi-file-earmark-music"></i>
+                            <span>M4A</span>
+                            <small>Original stream</small>
+                        </button>
+
+                        <button class="format-tab" id="tabMp3" onclick="setFormat('mp3')">
+                            <i class="bi bi-file-earmark-play"></i>
+                            <span>MP3</span>
+                            <small>320 kbps</small>
+                        </button>
+
+                        <button class="format-tab" id="tabWav" onclick="setFormat('wav')">
+                            <i class="bi bi-soundwave"></i>
+                            <span>WAV</span>
+                            <small>Lossless PCM</small>
+                        </button>
+
+                    </div>
+
+
+                    <div class="input-group input-group-modern">
+                        <span class="input-group-text"><i class="bi bi-globe2"></i></span>
+                        <input type="text" id="sunoUrl" placeholder="https://suno.com/song/..." autocomplete="off"
+                            aria-label="Suno song URL">
+                        <button class="paste-btn" onclick="pasteFromClipboard()">
+                            <i class="bi bi-clipboard"></i> Paste
+                        </button>
+                    </div>
+
+                    <button class="btn-download" id="btnDownload" onclick="startDownload()">
+                        <span><i class="bi bi-headphones"></i> Download Song</span>
+                        <i class="bi bi-arrow-right-short"></i>
+                    </button>
+
+                    <!-- Supported URL Examples -->
+                    <div class="url-reference mt-3">
+                        <button class="url-reference-toggle" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#urlExamples" aria-expanded="false" aria-controls="urlExamples">
+                            <span>
+                                <i class="bi bi-info-circle me-2"></i>
+                                Supported Suno URL examples
+                            </span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+
+                        <div class="collapse" id="urlExamples">
+                            <div class="url-reference-content">
+
+                                <p class="url-reference-description">
+                                    Select a demo link to fill the downloader input automatically.
+                                </p>
+
+                                <!-- Demo Song 1 -->
+                                <div class="url-example-item">
+                                    <div>
+                                        <strong>
+                                            <i class="bi bi-music-note-beamed me-1"></i>
+                                            Demo Song 1
+                                        </strong>
+                                        <code>https://suno.com/s/WxZwWbtM8cb5G48P</code>
+                                    </div>
+                                    <button type="button" class="url-example-copy"
+                                        onclick="fillSunoExample('https://suno.com/s/WxZwWbtM8cb5G48P')">
+                                        Use example
+                                    </button>
+                                </div>
+
+                                <!-- Demo Song 2 -->
+                                <div class="url-example-item">
+                                    <div>
+                                        <strong>
+                                            <i class="bi bi-music-note-beamed me-1"></i>
+                                            Demo Song 2
+                                        </strong>
+                                        <code>https://suno.com/s/APAJBfHXzpLnBsEs</code>
+                                    </div>
+                                    <button type="button" class="url-example-copy"
+                                        onclick="fillSunoExample('https://suno.com/s/APAJBfHXzpLnBsEs')">
+                                        Use example
+                                    </button>
+                                </div>
+
+                                <!-- Demo Song 3 -->
+                                <div class="url-example-item">
+                                    <div>
+                                        <strong>
+                                            <i class="bi bi-music-note-beamed me-1"></i>
+                                            Demo Song 3
+                                        </strong>
+                                        <code>https://suno.com/s/NY3DvLKQ5QopDzPU</code>
+                                    </div>
+                                    <button type="button" class="url-example-copy"
+                                        onclick="fillSunoExample('https://suno.com/s/NY3DvLKQ5QopDzPU')">
+                                        Use example
+                                    </button>
+                                </div>
+
+                                <!-- Demo Song 4 -->
+                                <div class="url-example-item">
+                                    <div>
+                                        <strong>
+                                            <i class="bi bi-music-note-beamed me-1"></i>
+                                            Demo Song 4
+                                        </strong>
+                                        <code>https://suno.com/s/IQjJCfrVTRu0wvZO</code>
+                                    </div>
+                                    <button type="button" class="url-example-copy"
+                                        onclick="fillSunoExample('https://suno.com/s/IQjJCfrVTRu0wvZO')">
+                                        Use example
+                                    </button>
+                                </div>
+
+                                <!-- Demo Song 5 -->
+                                <div class="url-example-item">
+                                    <div>
+                                        <strong>
+                                            <i class="bi bi-music-note-beamed me-1"></i>
+                                            Demo Song 5
+                                        </strong>
+                                        <code>https://suno.com/s/1lPpWawS5O0VIe1W</code>
+                                    </div>
+                                    <button type="button" class="url-example-copy"
+                                        onclick="fillSunoExample('https://suno.com/s/1lPpWawS5O0VIe1W')">
+                                        Use example
+                                    </button>
+                                </div>
+
+                                <!-- Large Hook -->
+                                <div class="url-example-item">
+                                    <div>
+                                        <strong>
+                                            <i class="bi bi-soundwave me-1"></i>
+                                            Large Hook URL
+                                        </strong>
+                                        <code>https://suno.com/hook/f0a5d387-4ee3-4cb8-a61a-217312ed4905</code>
+                                    </div>
+                                    <button type="button" class="url-example-copy"
+                                        onclick="fillSunoExample('https://suno.com/hook/f0a5d387-4ee3-4cb8-a61a-217312ed4905')">
+                                        Use example
+                                    </button>
+                                </div>
+
+                                <p class="url-reference-note mb-0">
+                                    Select a link to fill the input, then click
+                                    Load, Listen &amp; Download.
+                                </p>
+
+                            </div>
+                        </div>
+
+
+
+                        <div id="statusBadge" class="status-badge" style="display:none;"></div>
+
+                        <!-- Results -->
+                        <div class="result-box" id="resultBox">
+
+                            <div class="result-divider">
+                                <span><i class="bi bi-check-circle-fill"></i> Track ready</span>
+                            </div>
+
+                            <!-- Song Metadata -->
+                            <div class="song-info">
+                                <div class="cover-wrap">
+                                    <img id="resCover" class="cover-img" src="" alt="Cover">
+                                    <span class="cover-play"><i class="bi bi-play-fill"></i></span>
+                                </div>
+                                <div class="song-details">
+                                    <div class="result-kicker">NOW PLAYING</div>
+                                    <div class="song-title" id="resTitle">Title</div>
+                                    <div class="song-tags" id="resTags">Suno AI Track</div>
+                                    <div class="badges-row">
+                                        <span class="song-duration-badge" id="resDuration">
+                                            <i class="bi bi-clock"></i> 0:00
+                                        </span>
+                                        <span class="song-format-badge" id="resFormat">MP3</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Full Player -->
+                            <div class="player-box">
+                                <div class="player-header">
+                                    <span class="player-title">
+                                        <span class="mini-icon"><i class="bi bi-music-note-beamed"></i></span>
+                                        Full song
+                                    </span>
+                                    <div class="soundwave" id="waveMain">
+                                        <span></span><span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <audio id="resAudio" class="audio-player" controls preload="metadata"
+                                    onplay="setWave('waveMain', true)" onpause="setWave('waveMain', false)"
+                                    onended="setWave('waveMain', false)">
+                                    Your browser does not support the audio player.
+                                </audio>
+                                <a id="resDownloadLink" class="btn-save-phone" href="" download>
+                                    <i class="bi bi-download"></i> Save Full Song
+                                </a>
+                            </div>
+
+                            <!-- Audio Tools -->
+                            <div id="tools" class="tools-grid">
+
+                                <!-- Stems -->
+                                <div class="tool-card stem-section">
+                                    <div class="tool-card-top">
+                                        <div class="section-icon gradient-orange">
+                                            <i class="bi bi-mic-fill"></i>
+                                        </div>
+                                        <span class="tool-tag tag-pink">AI DSP</span>
+                                    </div>
+                                    <div class="stem-header">
+                                        <div class="stem-title">
+                                            Separate track & vocals
+                                        </div>
+                                    </div>
+                                    <p class="stem-desc">
+                                        Split the loaded song into instrumental and vocal tracks,
+                                        then preview or save each one.
+                                    </p>
+
+                                    <button class="btn-create-stem" id="btnCreateStem" onclick="separateStems()">
+                                        <span><i class="bi bi-magic"></i> SEPARATE STEMS</span>
+                                    </button>
+
+                                    <div class="stem-result-box" id="stemResultBox">
+                                        <div class="stem-card">
+                                            <div class="stem-card-header">
+                                                <div class="stem-card-title inst">
+                                                    <i class="bi bi-music-note-list"></i> Instrumental
+                                                </div>
+                                                <div class="soundwave" id="waveInst">
+                                                    <span></span><span></span><span></span><span></span>
+                                                </div>
+                                            </div>
+                                            <div class="stem-card-desc">Music / karaoke version</div>
+                                            <audio id="instAudioPlayer" class="audio-player" controls preload="metadata"
+                                                onplay="setWave('waveInst', true)" onpause="setWave('waveInst', false)"
+                                                onended="setWave('waveInst', false)"></audio>
+                                            <a id="instDownloadLink" class="btn-save-stem-inst" href="" download>
+                                                <i class="bi bi-download"></i> Save Instrumental
+                                            </a>
+                                        </div>
+
+                                        <div class="stem-card">
+                                            <div class="stem-card-header">
+                                                <div class="stem-card-title vocal">
+                                                    <i class="bi bi-mic"></i> Vocals only
+                                                </div>
+                                                <div class="soundwave" id="waveVocal">
+                                                    <span></span><span></span><span></span><span></span>
+                                                </div>
+                                            </div>
+                                            <div class="stem-card-desc">Clean isolated vocal track</div>
+                                            <audio id="vocalAudioPlayer" class="audio-player" controls
+                                                preload="metadata" onplay="setWave('waveVocal', true)"
+                                                onpause="setWave('waveVocal', false)"
+                                                onended="setWave('waveVocal', false)"></audio>
+                                            <a id="vocalDownloadLink" class="btn-save-stem-vocal" href="" download>
+                                                <i class="bi bi-download"></i> Save Vocals
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sample -->
+                                <div class="tool-card sample-section">
+                                    <div class="tool-card-top">
+                                        <div class="section-icon gradient-purple">
+                                            <i class="bi bi-scissors"></i>
+                                        </div>
+                                        <span class="tool-tag tag-purple">CLIP</span>
+                                    </div>
+                                    <div class="sample-header">
+                                        <div class="sample-title">Create a quick sample</div>
+                                    </div>
+                                    <p class="sample-desc" id="sampleDescText">
+                                        Generate a song excerpt with fade processing for a quick
+                                        preview.
+                                    </p>
+
+                                    <div class="preset-grid">
+                                        <button class="preset-btn" onclick="selectPreset('30s', this)">
+                                            <strong>30s</strong><small>Quick</small>
+                                        </button>
+                                        <button class="preset-btn" onclick="selectPreset('60s', this)">
+                                            <strong>1 min</strong><small>Short</small>
+                                        </button>
+                                        <button class="preset-btn" onclick="selectPreset('120s', this)">
+                                            <strong>2 min</strong><small>Long</small>
+                                        </button>
+                                        <button class="preset-btn active" onclick="selectPreset('auto', this)">
+                                            <strong>Auto</strong><small>Suggested</small>
+                                        </button>
+                                    </div>
+
+                                    <button class="btn-create-sample" id="btnCreateSample" onclick="generateSample()">
+                                        <span><i class="bi bi-scissors"></i> GENERATE SAMPLE</span>
+                                    </button>
+
+                                    <div class="sample-result-box" id="sampleResultBox">
+                                        <div class="player-header">
+                                            <span class="sample-result-label" id="sampleResultLabel">
+                                                <i class="bi bi-headphones"></i> Listen to sample
+                                            </span>
+                                            <div class="soundwave" id="waveSample">
+                                                <span></span><span></span><span></span><span></span>
+                                            </div>
+                                        </div>
+                                        <audio id="sampleAudioPlayer" class="audio-player" controls preload="metadata"
+                                            onplay="setWave('waveSample', true)" onpause="setWave('waveSample', false)"
+                                            onended="setWave('waveSample', false)"></audio>
+                                        <a id="sampleDownloadLink" class="btn-save-sample" href="" download>
+                                            <i class="bi bi-download"></i> Save Sample
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-pills justify-content-center">
+                        <span><i class="bi bi-lightning-charge-fill"></i> Fast processing</span>
+                        <span><i class="bi bi-headphones"></i> Instant preview</span>
+                        <span><i class="bi bi-shield-check"></i> Ephemeral server</span>
+                    </div>
+
+                </div>
+
+
+
+                <!-- Centered Telegram Bot Banner -->
+                <div class="telegram-promo-card-centered mb-4">
+                    <div class="tg-badge-center">
+                        <i class="bi bi-lightning-charge-fill"></i> FAST & UNLIMITED
+                    </div>
+
+                    <!-- Bot Avatar Box with Telegram indicator -->
+                    <div class="bot-avatar-wrapper">
+                        <img src="https://cdn5.telesco.pe/file/VMXUlg_OEndwR1IxkMIfRFJP9nVahthzENRcteAgwKreWN6t_Gjf-HF1U6Pma5pWHPEIm97POVYS4KBk6hrUyETlrAYCZSAThdUm0-Y1SS14YoWK938DA81zgrjkVLKKe8LMRQelMA1NM5Dy66BuhkCdjRjzuiA_g0JZOSNeZrNCD_D66nUNRZISAuNrkO7RYN7tbBlms19MRSdlDo8L2j9j3RORLRisEoCp63oA17f0r4-Ii30Syxtj19lrn-LZsBNpaVFmLQXJknHO6mpg-9V5gyl6aFeVyHG0hsMqgAP3zyVUKsewkt0s8bxlfVuD0PXvIKihcbbo_TKROruhsg.jpg"
+                            alt="Suno Bot Logo" class="bot-avatar-img">
+                        <span class="tg-indicator-badge">
+                            <i class="bi bi-telegram"></i>
+                        </span>
+                    </div>
+
+                    <div class="tg-text-center">
+                        <h3 class="tg-title-center">Download Unlimited Suno AI Songs on Telegram</h3>
+                        <p class="tg-subtitle-center">No queue, one-click instant audio & stem downloads
+                            directly inside your Telegram app.</p>
+                    </div>
+
+                    <a href="https://t.me/SunoAiSongDownloadBot" target="_blank" rel="noopener noreferrer"
+                        class="btn-tg-action-center">
+                        <i class="bi bi-robot"></i>
+                        <span>Open Telegram Bot</span>
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+
+    </main>
+
+    <!-- components/navbar.html -->
+
+<footer class="studio-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <a class="footer-brand" href="/">
+                    <span class="brand-mark"><i class="bi bi-soundwave"></i></span>
+                    <span data-site="name">Suno Ai Song Download</span>
+                </a>
+                <p class="footer-blurb">
+                    A free tool to download public Suno songs as MP3, M4A or WAV, split them into
+                    instrumental and vocals, and cut short preview samples. Independent and not
+                    affiliated with Suno.
+                </p>
+                <a class="btn-soft" data-site-link="bot" href="https://t.me/SunoAiSongDownloadBot" target="_blank"
+                    rel="noopener noreferrer"><i class="bi bi-telegram"></i> Open the Telegram bot</a>
+            </div>
+
+            <div class="col-6 col-lg-2">
+                <h6 class="footer-heading">Tool</h6>
+                <ul class="footer-links">
+                    <li><a href="/#download">Downloader</a></li>
+                    <li><a href="/how-it-works">How it works</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/status">Server status</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-lg-2">
+                <h6 class="footer-heading">Project</h6>
+                <ul class="footer-links">
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/telegram-bot">Telegram bot</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <h6 class="footer-heading">Legal</h6>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy policy</a></li>
+                    <li><a href="/terms">Terms of use</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© <span data-year></span> <span data-site="name">Suno Ai Song Download</span></span>
+            <span>Not affiliated with Suno. “Suno” belongs to its respective owner.</span>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/site.js"></script>
+    
+</body>
+
+</html>

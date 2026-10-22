@@ -1,0 +1,572 @@
+/* ==========================================================================
+   pages.css — load AFTER style.css on every page (home page too, because
+   the footer is shared). Uses the same tokens: --sky-*, --ink, --muted, --line
+   ========================================================================== */
+
+/* ---------- Space reserved while navbar/footer are loading ---------- */
+#site-nav:empty {
+    min-height: 68px;
+}
+
+#site-footer:empty {
+    min-height: 300px;
+}
+
+/* ---------- Shared footer ---------- */
+.studio-footer {
+    margin-top: 2rem;
+    padding: 3rem 0 1.5rem;
+    text-align: left;
+}
+
+.footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    color: var(--ink);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.footer-blurb {
+    max-width: 44ch;
+    margin: .9rem 0 1.1rem;
+    color: var(--muted);
+    font-size: .92rem;
+}
+
+.footer-heading {
+    margin-bottom: .9rem;
+    color: var(--ink);
+    font-size: .85rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+}
+
+.footer-links {
+    display: grid;
+    gap: .6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* same slide-in underline idea as the navbar */
+.footer-links a {
+    padding-bottom: 2px;
+    color: var(--muted);
+    font-size: .92rem;
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--sky-400), var(--sky-600)) left bottom / 0 2px no-repeat;
+    transition: background-size .35s var(--ease), color .25s;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+    color: var(--sky-600);
+    background-size: 100% 2px;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .5rem 1.5rem;
+    margin-top: 2.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+/* ---------- Soft + main buttons for content pages ---------- */
+.btn-soft,
+.btn-main {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .75rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease),
+        background-color .2s, border-color .2s;
+}
+
+.btn-soft {
+    border: 1.5px solid var(--sky-200);
+    background: var(--sky-50);
+    color: var(--sky-700);
+}
+
+.btn-soft:hover {
+    border-color: var(--sky-400);
+    background: var(--sky-100);
+    color: var(--sky-700);
+    transform: translateY(-2px);
+}
+
+.btn-main {
+    border: 0;
+    background: linear-gradient(135deg, var(--sky-400), var(--sky-600));
+    color: #fff;
+    box-shadow: 0 10px 22px -12px rgba(2, 132, 199, .7);
+}
+
+.btn-main:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-pop);
+}
+
+/* ---------- Page hero ---------- */
+.page-hero {
+    padding: 3.5rem 0 2rem;
+    text-align: center;
+    animation: rise .7s var(--ease) both;
+}
+
+.page-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .35rem .9rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--sky-50);
+    color: var(--sky-700);
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.page-hero h1 {
+    max-width: 22ch;
+    margin: 1rem auto .75rem;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+}
+
+.page-hero h1 em {
+    font-style: normal;
+    color: var(--sky-600);
+}
+
+.page-hero .lead {
+    max-width: 60ch;
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.updated-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    margin: 1.1rem 0 0;
+    color: var(--muted);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.updated-chip i {
+    color: var(--sky-500);
+}
+
+/* ---------- Readable text (legal pages, about) ---------- */
+.prose {
+    line-height: 1.75;
+}
+
+.prose h2 {
+    margin: 2.25rem 0 .75rem;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    scroll-margin-top: 100px;
+}
+
+.prose h2:first-child {
+    margin-top: 0;
+}
+
+.prose h3 {
+    margin: 1.5rem 0 .5rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+    max-width: 75ch;
+}
+
+.prose p,
+.prose li {
+    color: #2b4257;
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 1.25rem;
+}
+
+.prose li {
+    margin-bottom: .4rem;
+}
+
+.prose strong {
+    color: var(--ink);
+}
+
+.prose a {
+    color: var(--sky-600);
+    font-weight: 600;
+    text-underline-offset: 3px;
+}
+
+.prose a:hover {
+    color: var(--sky-700);
+}
+
+/* ---------- Table of contents (legal pages, desktop only) ---------- */
+.legal-toc {
+    position: sticky;
+    top: 96px;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+}
+
+.legal-toc h6 {
+    margin-bottom: .6rem;
+    font-size: .85rem;
+    font-weight: 800;
+}
+
+.legal-toc .nav-link {
+    padding: .3rem 0 .3rem .8rem;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+    font-size: .88rem;
+    transition: color .2s, border-color .2s;
+}
+
+.legal-toc .nav-link:hover,
+.legal-toc .nav-link.active {
+    border-left-color: var(--sky-500);
+    color: var(--sky-700);
+}
+
+/* ---------- Callouts ---------- */
+.callout {
+    display: flex;
+    gap: .9rem;
+    margin: 1.25rem 0;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--sky-200);
+    border-radius: 16px;
+    background: var(--sky-50);
+}
+
+.callout>i {
+    flex: none;
+    margin-top: .1rem;
+    color: var(--sky-600);
+    font-size: 1.25rem;
+}
+
+.callout p {
+    margin: 0;
+    max-width: none;
+}
+
+.callout-warn {
+    border-color: #fde68a;
+    background: #fffbeb;
+}
+
+.callout-warn>i {
+    color: #d97706;
+}
+
+/* ---------- Cards: info + steps ---------- */
+.info-card,
+.step-card {
+    height: 100%;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+}
+
+.info-card .section-icon {
+    margin-bottom: 1rem;
+}
+
+.info-card h3,
+.step-card h3 {
+    margin-bottom: .4rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.info-card p,
+.step-card p {
+    margin-bottom: .9rem;
+    color: var(--muted);
+    font-size: .93rem;
+}
+
+.info-card p:last-child,
+.step-card p:last-child {
+    margin-bottom: 0;
+}
+
+.info-card {
+    position: relative;
+    /* required so the link covers the whole card */
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(14, 165, 233, .15);
+    border-color: rgba(14, 165, 233, .4);
+    cursor: pointer;
+}
+
+
+
+
+.link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    color: var(--sky-600);
+    font-weight: 700;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.link-arrow i {
+    transition: transform .3s var(--ease);
+}
+
+.link-arrow:hover {
+    color: var(--sky-700);
+}
+
+.link-arrow:hover i {
+    transform: translate(3px, -3px);
+}
+
+.step-num {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+    border-radius: 13px;
+    background: var(--sky-100);
+    color: var(--sky-700);
+    font-weight: 800;
+}
+
+/* ---------- Table ---------- */
+.compare-table {
+    --bs-table-bg: transparent;
+    margin: 0;
+    border-color: var(--line);
+    vertical-align: middle;
+}
+
+.compare-table th {
+    background: var(--sky-50);
+    color: var(--sky-700);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.compare-table td {
+    color: #2b4257;
+}
+
+/* ---------- FAQ accordion (Bootstrap accordion, sky style) ---------- */
+.faq-accordion {
+    --bs-accordion-border-color: var(--line);
+    --bs-accordion-border-radius: 18px;
+    --bs-accordion-inner-border-radius: 17px;
+    --bs-accordion-btn-padding-y: 1.1rem;
+    --bs-accordion-btn-padding-x: 1.25rem;
+    --bs-accordion-body-padding-x: 1.25rem;
+    --bs-accordion-active-bg: var(--sky-50);
+    --bs-accordion-active-color: var(--sky-700);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 4px rgba(14, 165, 233, .2);
+    --bs-accordion-btn-focus-border-color: var(--sky-400);
+    display: grid;
+    gap: .75rem;
+}
+
+.faq-accordion .accordion-item {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    transition: border-color .25s, box-shadow .25s;
+}
+
+.faq-accordion .accordion-item:has(.accordion-button:not(.collapsed)) {
+    border-color: var(--sky-300);
+    box-shadow: var(--shadow-soft);
+}
+
+.faq-accordion .accordion-button {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.faq-accordion .accordion-body {
+    color: #2b4257;
+    line-height: 1.7;
+}
+
+.faq-accordion .accordion-body a {
+    color: var(--sky-600);
+    font-weight: 600;
+}
+
+/* ---------- CTA banner ---------- */
+.cta-banner {
+    padding: 2.25rem 1.5rem;
+    border-radius: var(--r-lg);
+    background: linear-gradient(135deg, var(--sky-400), var(--sky-600));
+    box-shadow: var(--shadow-pop);
+    color: #fff;
+    text-align: center;
+}
+
+.cta-banner h2 {
+    margin-bottom: .5rem;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+
+.cta-banner p {
+    margin: 0 auto 1.4rem;
+    max-width: 52ch;
+    opacity: .92;
+}
+
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .8rem 1.6rem;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--sky-700);
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+.btn-cta:hover {
+    color: var(--sky-700);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -10px rgba(3, 105, 161, .6);
+}
+
+/* ---------- Status page ---------- */
+.status-big {
+    padding: .7rem 1.3rem;
+    font-size: 1.05rem;
+    cursor: default;
+}
+
+.metric {
+    height: 100%;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--sky-50);
+}
+
+.metric span {
+    color: var(--muted);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.metric strong {
+    display: block;
+    margin-top: .2rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+/* ---------- 404 ---------- */
+.err-code {
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.04em;
+    background: linear-gradient(135deg, var(--sky-300), var(--sky-600));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ---------- FAQ: numbered questions + roomy answers ---------- */
+.faq-accordion {
+    counter-reset: faq;
+}
+
+.faq-accordion .accordion-button::before {
+    counter-increment: faq;
+    content: counter(faq);
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    margin-right: .9rem;
+    border-radius: 10px;
+    background: var(--sky-100);
+    color: var(--sky-700);
+    font-size: .82rem;
+    font-weight: 800;
+    transition: background-color .25s, color .25s;
+}
+
+.faq-accordion .accordion-button:not(.collapsed)::before {
+    background: var(--sky-500);
+    color: #fff;
+}
+
+.faq-accordion .accordion-body p {
+    margin-bottom: .7rem;
+}
+
+.faq-accordion .accordion-body p:last-child,
+.faq-accordion .accordion-body ul:last-child {
+    margin-bottom: 0;
+}
+
+.faq-accordion .accordion-body ul {
+    padding-left: 1.25rem;
+}
+
+.faq-accordion .accordion-body code {
+    padding: .1rem .4rem;
+    border-radius: 6px;
+    background: var(--sky-50);
+    color: var(--sky-700);
+    word-break: break-all;
+}
