@@ -1,20 +1,29 @@
-# serve.py
 """
-I will run this file so make a local testing like 
-Github Page offers for us
+Local test server that behaves like GitHub Pages serving the /docs folder.
+
+    python3 serve.py
+
+1. Rebuilds the site (src/ -> docs/) every time you start it
+2. Serves ONLY the docs/ folder, so  /faq -> docs/faq.html,  /static/... -> docs/static/...
+3. Shows docs/404.html (status 404) for unknown pages, like GitHub Pages
 """
 
 import http.server
 import os
 import socket
+from pathlib import Path
+
+import build  # build.py in the same folder
 
 PORT = 5500
+ROOT = Path(__file__).parent.resolve()
+DOCS = ROOT / "docs"
+
 
 def get_local_ip():
     """Finds the local network IP assigned by your mobile hotspot/Wi-Fi."""
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        # Does not actually send data; used to determine outgoing interface IP
         s.connect(("8.8.8.8", 80))
         ip = s.getsockname()[0]
     except Exception:
@@ -23,29 +32,40 @@ def get_local_ip():
         s.close()
     return ip
 
+
 class CleanURLHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
-        # Separate the path from query params (e.g., /faq?ref=nav)
-        parts = self.path.split('?', 1)
-        clean_path = parts[0].rstrip('/')
-        query_string = f"?{parts[1]}" if len(parts) > 1 else ""
+        path, _, query = self.path.partition("?")
+        query = f"?{query}" if query else ""
+        clean_path = path.rstrip("/")
 
-        # If it's not the root path and has no extension (like .css, .js, .png)
+        # /faq -> /faq.html  (only when the URL has no extension)
         if clean_path and not os.path.splitext(clean_path)[1]:
-            # Convert /faq to faq.html
-            local_file = clean_path.lstrip('/') + '.html'
-            if os.path.isfile(local_file):
-                self.path = '/' + local_file + query_string
+            if (DOCS / (clean_path.lstrip("/") + ".html")).is_file():
+                self.path = clean_path + ".html" + query
+
+        # unknown page -> docs/404.html with a 404 status (like GitHub Pages)
+        target = Path(self.translate_path(self.path.partition("?")[0]))
+        not_found = not target.exists()
+        if not_found and (DOCS / "404.html").is_file():
+            body = (DOCS / "404.html").read_bytes()
+            self.send_response(404)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
 
         return super().do_GET()
 
-if __name__ == '__main__':
-    # Binding to "0.0.0.0" makes the server accessible across the local network
-    server_address = ('0.0.0.0', PORT)
-    httpd = http.server.HTTPServer(server_address, CleanURLHandler)
-    
+
+if __name__ == "__main__":
+    build.main()  # rebuild docs/ from src/
+    os.chdir(DOCS)  # serve the docs folder as the site root
+
+    httpd = http.server.HTTPServer(("0.0.0.0", PORT), CleanURLHandler)
     local_ip = get_local_ip()
-    
+
     print("=" * 55)
     print(" 🚀 Python Clean-URL Server is Running!")
     print("=" * 55)
