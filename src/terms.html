@@ -1,0 +1,92 @@
+{% extends "_base.html" %}
+{% set title = "Terms of use" %}
+{% set description = "Terms of use for Suno Ai Song Download." %}
+{% block body_attrs %}data-bs-spy="scroll" data-bs-target="#toc" data-bs-smooth-scroll="true" tabindex="0"{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="page-kicker"><i class="bi bi-file-earmark-text-fill"></i> Terms of use</span>
+        <h1>The <em>ground rules</em> for using the Service</h1>
+        <p class="lead">Short and clear: use it fairly, respect creators, and save your files.</p>
+        <p class="updated-chip"><i class="bi bi-calendar-check"></i> Last updated: <span data-site="updated"></span></p>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <aside class="col-lg-3 d-none d-lg-block">
+                <nav id="toc" class="legal-toc nav flex-column">
+                    <h6>On this page</h6>
+                    <a class="nav-link" href="#accept">Accepting these terms</a><a class="nav-link" href="#service">What
+                        the Service does</a><a class="nav-link" href="#use">Acceptable
+                        use</a><a class="nav-link" href="#rights">Songs and rights</a><a class="nav-link"
+                        href="#files">Temporary files</a><a class="nav-link" href="#availability">Availability
+                        and changes</a><a class="nav-link" href="#warranty">No warranty</a><a class="nav-link"
+                        href="#liability">Limit of liability</a><a class="nav-link" href="#third">Third-party
+                        services</a><a class="nav-link" href="#copyright">Copyright and removal requests</a><a
+                        class="nav-link" href="#law">Changes and governing law</a><a class="nav-link"
+                        href="#contact">Contact</a>
+                </nav>
+            </aside>
+            <div class="col-lg-9">
+                <article class="workspace-card prose">
+                    <h2 id="accept">Accepting these terms</h2>
+                    <p>By using <span data-site="name">Suno Ai Song Download</span> (the “Service”), including
+                        the website and the Telegram bot, you agree to these terms. If you do not agree, please
+                        do not use the Service.</p>
+                    <h2 id="service">What the Service does</h2>
+                    <p>The Service lets you download <strong>public</strong> Suno songs from a link you provide,
+                        as MP3, M4A or WAV, split them into instrumental and vocals, and create short samples.
+                        It is a tool: it does not host, sell or publish any music.</p>
+                    <h2 id="use">Acceptable use</h2>
+                    <p>You agree to use the Service only in a lawful way and to respect the rights of others. In
+                        particular, you will <strong>not</strong>:</p>
+                    <ul>
+                        <li>download songs you have no right to download or use;</li>
+                        <li>send automated, bulk or very frequent requests, or try to get around limits;</li>
+                        <li>attack, overload, probe or try to break into the Service or its servers;</li>
+                        <li>use the Service to harm, harass or deceive anyone, or to break any law or the terms
+                            of Suno or Telegram.</li>
+                    </ul>
+                    <h2 id="rights">Songs and rights</h2>
+                    <p>The Service gives you <strong>no rights</strong> to any song. You are responsible for
+                        making sure you may download and use a song, including checking Suno’s terms and the
+                        plan the song was created under. All songs, names and marks belong to their respective
+                        owners.</p>
+                    <h2 id="files">Temporary files</h2>
+                    <p>Files created for you are kept only for a few minutes and then deleted automatically.
+                        Save what you need immediately. We cannot recover files after deletion.</p>
+                    <h2 id="availability">Availability and changes</h2>
+                    <p>The Service is offered free of charge. We may change, limit, suspend or stop any part of
+                        it at any time, for example to keep it stable or because Suno changes how its links
+                        work. We may block access for abuse or for any use that breaks these terms.</p>
+                    <h2 id="warranty">No warranty</h2>
+                    <p>The Service is provided <strong>“as is” and “as available”</strong>, without promises of
+                        any kind: that it will always work, be error-free, be fast, or produce a particular
+                        audio quality. Results of vocal separation in particular are approximate.</p>
+                    <h2 id="liability">Limit of liability</h2>
+                    <p>To the extent allowed by law, we are not liable for any loss or damage arising from your
+                        use of the Service, including lost files, downtime, or how you use a downloaded song.
+                        Nothing in these terms limits any right you have by law that cannot be limited.</p>
+                    <h2 id="third">Third-party services</h2>
+                    <p>The Service depends on others, such as Suno and Telegram. We do not control them and are
+                        not responsible for their content, availability or policies.</p>
+                    <h2 id="copyright">Copyright and removal requests</h2>
+                    <p>If you believe something on the Service infringes your rights, please contact us through
+                        the <a href="/contact#takedown">Contact page</a> with the link to the song and a
+                        short explanation. We will review it and act where appropriate.</p>
+                    <h2 id="law">Changes and governing law</h2>
+                    <p>We may update these terms and will change the date at the top when we do. Continuing to
+                        use the Service after a change means you accept it. These terms are governed by the laws
+                        of the country where the operator is based.</p>
+                    <h2 id="contact">Contact</h2>
+                    <p>Questions about these terms? <a href="/contact">Contact us</a>.</p>
+
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+{% set title = "Server status" %}
+{% set description = "Live status of the Suno Ai Song Download server: online or error, with response time." %}
+{% set extra_js = ["/static/js/status.js"] %}
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="page-kicker"><i class="bi bi-activity"></i> Server status</span>
+        <h1>Is the server <em>online right now?</em></h1>
+        <p class="lead">This page asks our server directly. If it shows an error, the downloader cannot work
+            until it is back.</p>
+
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="workspace-card text-center">
+                    <div class="server-status-pill status-big is-checking" id="statusPill" role="status"
+                        aria-live="polite">
+                        <span class="status-dot"></span>
+                        <span id="statusText">Checking…</span>
+                    </div>
+
+                    <div class="row g-3 mt-3 text-start">
+                        <div class="col-sm-4">
+                            <div class="metric"><span>Status</span><strong id="mStatus">…</strong></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="metric"><span>Response time</span><strong id="mTime">…</strong></div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="metric"><span>Last checked</span><strong id="mChecked">…</strong></div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-main mt-4" id="recheck"><i class="bi bi-arrow-clockwise"></i> Check
+                        again</button>
+
+                    <div class="callout mt-4 mb-0 text-start">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <p>Red but your internet works? Wait a minute and check again. If it stays red, please
+                            <a href="/contact">tell us</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

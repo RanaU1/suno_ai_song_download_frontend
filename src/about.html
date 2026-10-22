@@ -1,0 +1,105 @@
+{% extends "_base.html" %}
+{% set title = "About" %}
+{% set description = "About Suno Ai Song Download." %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="page-kicker"><i class="bi bi-stars"></i> About</span>
+        <h1>A small tool built to be <em>simple and fast</em></h1>
+        <p class="lead">One job done well: turn a public Suno link into an audio file you can keep.</p>
+
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <article class="workspace-card prose">
+                    <h2>What this site is</h2>
+                    <p><span data-site="name">Suno Ai Song Download</span> lets you download public Suno songs
+                        as MP3, M4A or WAV, split a song into instrumental and vocals, and create short preview
+                        samples. It is made and maintained by <strong data-site="owner">RanaUniverse</strong> as
+                        an independent project.</p>
+
+                    <h2>Why it exists</h2>
+                    <p>Creators often want a quick, clean copy of their own songs, for a video, a demo or an
+                        offline playlist, without installing software or creating yet another account. This site
+                        tries to make that a ten-second job.</p>
+
+                    <h2>What it is not</h2>
+                    <p>We are <strong>not affiliated with, endorsed by or connected to Suno</strong>. We do not
+                        host a music library and we do not publish anyone’s songs. Everything is created on
+                        request from a link you provide and removed again within minutes. See the <a
+                            href="/disclaimer">Disclaimer</a>.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <div class="row g-3">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-pink"><i class="bi bi-person-x-fill"></i></div>
+                            <h3>No accounts</h3>
+                            <p>Paste a link and go. No sign-up, no email.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-orange"><i class="bi bi-shield-check"></i></div>
+                            <h3>No tracking</h3>
+                            <p>No ads and no analytics trackers on this site.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-purple"><i class="bi bi-hourglass-split"></i>
+                            </div>
+                            <h3>Short-lived files</h3>
+                            <p>Files are deleted automatically within minutes.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-pink"><i class="bi bi-phone-fill"></i></div>
+                            <h3>Phone friendly</h3>
+                            <p>Designed to work as well on a phone as on a PC.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <article class="workspace-card prose">
+                    <h2>How it is built</h2>
+                    <p>The website you are looking at is a static site. A small Python service on our own server
+                        fetches the song, converts it with FFmpeg and sends you the file. A companion Telegram
+                        bot does the same thing inside Telegram.</p>
+                    <p>Questions or ideas? We would love to hear them on the <a href="/contact">Contact
+                            page</a>.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="cta-banner">
+            <h2>Try it now</h2>
+            <p>Paste a public Suno link and see how simple it can be.</p>
+            <a class="btn-cta" href="/#download"><i class="bi bi-cloud-arrow-down-fill"></i> Open the
+                downloader</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

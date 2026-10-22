@@ -1,0 +1,95 @@
+{% extends "_base.html" %}
+{% set title = "Contact US" %}
+{% set description = "Contact Suno Ai Song Download: report a bug, ask a question or send a removal request via Telegram
+or email." %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="page-kicker"><i class="bi bi-chat-dots-fill"></i> Contact</span>
+        <h1>We’re happy to <em>hear from you</em></h1>
+        <p class="lead">Bug reports, ideas, removal requests: pick the way that suits you best.</p>
+
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <div class="row g-3">
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-pink"><i class="bi bi-telegram"></i></div>
+                            <h3>Telegram</h3>
+                            <p>The fastest way to reach the admin for bugs and questions.</p>
+                            <a class="link-arrow stretched-link" data-site-link="telegram" href="#" target="_blank"
+                                rel="noopener noreferrer">Message on Telegram <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-orange"><i class="bi bi-envelope-fill"></i></div>
+                            <h3>Email</h3>
+                            <p>Best for removal requests and anything longer.</p>
+                            <a class="link-arrow stretched-link" data-site-link="email" data-site="email" href="#"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-green"><i class="bi bi-whatsapp"></i></div>
+                            <h3>WhatsApp</h3>
+                            <p>Prefer WhatsApp? Send a message any time.</p>
+                            <a class="link-arrow stretched-link" data-site-link="whatsapp" href="#" target="_blank"
+                                rel="noopener noreferrer">Chat on WhatsApp <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="info-card">
+                            <div class="section-icon gradient-purple"><i class="bi bi-robot"></i></div>
+                            <h3>The bot</h3>
+                            <p>Want audio inside Telegram? Open the bot and send a link.</p>
+                            <a class="link-arrow stretched-link" data-site-link="bot" href="#" target="_blank"
+                                rel="noopener noreferrer">Open the bot <i class="bi bi-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <article class="workspace-card prose">
+                    <h2>Reporting a problem? Please include</h2>
+                    <ul>
+                        <li>The Suno link you used (public links only).</li>
+                        <li>The format you chose (MP3, M4A or WAV).</li>
+                        <li>What you saw: the message on screen, or what did not happen.</li>
+                        <li>Roughly when it happened, with your time zone.</li>
+                        <li>Your device and browser, for example “Android, Chrome”.</li>
+                    </ul>
+                    <p>Please <strong>never send passwords</strong> or payment details.</p>
+
+                    <h2 id="takedown">Copyright and removal requests</h2>
+                    <p>If you are the rights holder of a song and want something removed, write to us with the
+                        link to the song and a short explanation of your claim. Files created on this site are
+                        deleted automatically within minutes and nothing is published or shared, but we will
+                        review your message and act where appropriate.</p>
+
+                    <h2>Response time</h2>
+                    <p>This is a small project run by one person. We read every message but cannot promise an
+                        exact reply time. Before writing, the <a href="/faq">FAQ</a> and the <a href="/status">status
+                            page</a> often answer the question straight away.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "_base.html" %}
+{% set title = "How it works " %}
+{% set description = "Download a Suno song in four steps: copy the share link, paste it, choose MP3, M4A or WAV and
+press download." %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="page-kicker"><i class="bi bi-lightning-charge-fill"></i> How it works</span>
+        <h1>Download a Suno song in <em>four steps</em></h1>
+        <p class="lead">No account, no installation. Works in any modern browser on phone or computer.</p>
+
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row g-3 justify-content-center">
+            <div class="col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Copy the link</h3>
+                    <p>Open the song on Suno, press <strong>Share</strong> and copy the link. The song must be public.
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Paste it</h3>
+                    <p>Paste the link into the box on the home page. On a phone, use the <strong>Paste</strong> button.
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Pick a format</h3>
+                    <p>Choose <strong>MP3</strong>, <strong>M4A</strong> or <strong>WAV</strong>. Not sure? M4A is a
+                        good default.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Press Download</h3>
+                    <p>Wait a few seconds, listen to the preview, then press <strong>Save Full Song</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <div class="workspace-card">
+                    <div class="section-heading">
+                        <div class="section-icon gradient-pink"><i class="bi bi-file-earmark-music-fill"></i></div>
+                        <div>
+                            <h2>Which format is right for me?</h2>
+                            <p>Sizes are rough figures for a typical song.</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table compare-table">
+                            <thead>
+                                <tr>
+                                    <th>Format</th>
+                                    <th>Best for</th>
+                                    <th>Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>MP3</strong></td>
+                                    <td>Maximum compatibility: cars, old players, any app</td>
+                                    <td>about 2.4 MB per minute at 320 kbps</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>M4A</strong></td>
+                                    <td>Phones and everyday listening, small files</td>
+                                    <td>about the same as MP3 or smaller</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WAV</strong></td>
+                                    <td>Editing in a music or video program</td>
+                                    <td>about 10 MB per minute</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout mt-4 mb-0">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <p>WAV is uncompressed, but it is made from the same source audio. It is larger, not better.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center g-4">
+            <div class="col-xl-9">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <div class="section-icon gradient-purple"><i class="bi bi-music-note-list"></i></div>
+                            <h3>Track and vocals</h3>
+                            <p>After a song loads, split it into an instrumental and a vocals-only file. It uses audio
+                                signal processing, so treat the result as a quick approximation.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <div class="section-icon gradient-orange"><i class="bi bi-scissors"></i></div>
+                            <h3>Preview sample</h3>
+                            <p>Cut a short clip with a fade-out: auto, 30 seconds, 1 minute, 2 minutes or half of the
+                                song.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="callout callout-warn mt-4">
+                    <i class="bi bi-clock-history"></i>
+                    <p><strong>Save your files right away.</strong> Everything created for you is deleted from the
+                        server automatically after a few minutes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="cta-banner">
+            <h2>Ready to try it?</h2>
+            <p>Paste a public Suno link and your song is ready in a few seconds.</p>
+            <a class="btn-cta" href="/#download"><i class="bi bi-cloud-arrow-down-fill"></i> Open the downloader</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

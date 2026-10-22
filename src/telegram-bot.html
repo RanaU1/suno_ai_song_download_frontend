@@ -1,0 +1,81 @@
+{% extends "_base.html" %}
+{% set title = "Telegram Bot" %}
+{% set description = "Download Suno songs inside Telegram: send a public Suno link to the bot and receive the audio
+file." %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="page-kicker"><i class="bi bi-telegram"></i> Telegram bot</span>
+        <h1>Get your Suno songs <em>right inside Telegram</em></h1>
+        <p class="lead">Send a public Suno link to the bot and it replies with the audio file. No browser
+            needed.</p>
+        <div class="mt-4"><a class="btn-main" data-site-link="bot" href="#" target="_blank" rel="noopener noreferrer"><i
+                    class="bi bi-robot"></i> Open the Telegram bot <i class="bi bi-arrow-up-right"></i></a></div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="step-card">
+                            <div class="step-num">1</div>
+                            <h3>Open the bot</h3>
+                            <p>Tap the button above and press <strong>Start</strong> in Telegram.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="step-card">
+                            <div class="step-num">2</div>
+                            <h3>Send a link</h3>
+                            <p>Paste a public Suno song link as a normal message.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="step-card">
+                            <div class="step-num">3</div>
+                            <h3>Get the audio</h3>
+                            <p>The bot shows the song details and sends the audio file to your chat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <article class="workspace-card prose">
+                    <h2>Good to know</h2>
+                    <ul>
+                        <li>It works with <strong>public</strong> Suno links only.</li>
+                        <li>Telegram limits the size of files a bot can send, so a very long song may not
+                            arrive. In that case use the website, which can also give you the song as WAV.</li>
+                        <li>Using the bot means using Telegram, which has its own <a href="https://telegram.org/privacy"
+                                target="_blank" rel="noopener noreferrer">privacy policy</a>.</li>
+                        <li>The bot is independent and not affiliated with Suno. See the <a href="/terms">Terms</a> and
+                            <a href="/privacy">Privacy policy</a>.
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="workspace-section pt-0 ">
+    <div class="container">
+        <div class="cta-banner">
+            <h2>Prefer the website?</h2>
+            <p>The browser version also splits songs into vocals and instrumental.</p>
+            <a class="btn-cta" href="/#download"><i class="bi bi-cloud-arrow-down-fill"></i> Open the
+                downloader</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
